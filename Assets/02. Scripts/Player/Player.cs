@@ -61,10 +61,25 @@ public class Temperature
     {
         temperGauge.transform.rotation = Quaternion.Euler(0, 0, (curtemperature / starttemperature) * -90);
         if (curtemperature > 54.75)
+        {
             temperGauge.color = Color.red;
+            hotUI.enabled = true;
+            //TODO : 데미지 입게 해야될 듯
+        }
+            
         else if (curtemperature < 18.25)
+        {
             temperGauge.color = Color.blue;
-        else temperGauge.color = Color.white;
+            coldUI.enabled = true;
+            //TODO : 이동속도 느려지고 데미지?
+        }
+
+        else
+        {
+            temperGauge.color = Color.white;
+            hotUI.enabled = false;
+            coldUI.enabled = false;
+        }
     }
 } 
 
@@ -101,7 +116,7 @@ public class Player : MonoBehaviour
         if (!iswarm)
             temperature.Cold(temperature.decayRate*Time.deltaTime);
         
-        if(hunger.curValue == 0.0f)
+        if(hunger.curValue == 0.0f || thirsty.curValue == 0.0f)
             health.Subtract(noHungerHealthDecay*Time.deltaTime);
         
         if(health.curValue == 0.0f)
