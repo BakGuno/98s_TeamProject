@@ -22,6 +22,7 @@ public class DayNight : MonoBehaviour
     {
         timeRate = 1.0f / fullDayLength;
         time = startTime;
+        clock.color = dayColor;
     }
 
     private void Update() //해가 떳다지는 한 순환 안에서 빛을 조절함.

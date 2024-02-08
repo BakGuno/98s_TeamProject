@@ -28,14 +28,55 @@ public class Condition
     }
 }
 
+[System.Serializable]
+public class Temperature
+{
+    [HideInInspector]
+    public float starttemperature;
+    public float curtemperature;
+    public float maxTemp;
+    public float minTemp;
+    public Image temperGauge;
+    public Image coldUI;
+    public Image hotUI;
+    public float decayRate;
+    //TODO ; 추울 때 화면 진동 주면 괜찮겠지?
+
+    public void Heat(float heat)
+    {
+        curtemperature += heat;
+        if (curtemperature >= maxTemp)
+            curtemperature = maxTemp;
+        
+    }
+
+    public void Cold(float heat)
+    {
+        curtemperature -= heat;
+        if (curtemperature <=minTemp)
+            curtemperature = minTemp;
+    }
+
+    public void moveGauge()
+    {
+        temperGauge.transform.rotation = Quaternion.Euler(0, 0, (curtemperature / starttemperature) * -90);
+        if (curtemperature > 54.75)
+            temperGauge.color = Color.red;
+        else if (curtemperature < 18.25)
+            temperGauge.color = Color.blue;
+        else temperGauge.color = Color.white;
+    }
+} 
+
 public class Player : MonoBehaviour
 {
     public Condition health;
     public Condition stamina;
     public Condition hunger;
     public Condition thirsty;
-    public float temperature;
-    
+    public Temperature temperature;
+
+    public bool iswarm; //TODO : 낮 시간대는 따뜻하고 밤 시간대는 춥게
     private bool isDead = false;
     
     public float noHungerHealthDecay;
@@ -48,7 +89,8 @@ public class Player : MonoBehaviour
         hunger.curValue = hunger.startValue;
         stamina.curValue = stamina.startValue;
         thirsty.curValue = thirsty.startValue;
-        temperature = 36.5f;
+        temperature.curtemperature = temperature.starttemperature;
+        iswarm = false;
     }
     
     void Update()
@@ -56,6 +98,8 @@ public class Player : MonoBehaviour
         hunger.Subtract(hunger.decayRate*Time.deltaTime);
         thirsty.Subtract(thirsty.decayRate*Time.deltaTime);
         stamina.Add(stamina.regenRate*Time.deltaTime);
+        if (!iswarm)
+            temperature.Cold(temperature.decayRate*Time.deltaTime);
         
         if(hunger.curValue == 0.0f)
             health.Subtract(noHungerHealthDecay*Time.deltaTime);
@@ -67,6 +111,7 @@ public class Player : MonoBehaviour
         hunger.uiBar.fillAmount = hunger.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
         thirsty.uiBar.fillAmount = thirsty.GetPercentage();
+        temperature.moveGauge();
     }
 
     public void Heal(float amount)
@@ -98,4 +143,6 @@ public class Player : MonoBehaviour
         health.Subtract(damageAmount);
         //onTakeDamage?.Invoke();
     }
+
+   
 }
