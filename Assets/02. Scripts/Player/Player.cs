@@ -82,7 +82,6 @@ public class Temperature
         {
             temperGauge.color = Color.black;
             hotUI.SetActive(false);
-            
             coldUI.SetActive(false);
         }
     }
@@ -91,13 +90,16 @@ public class Temperature
 public class Player : MonoBehaviour
 {
     public Condition health;
+    public Condition mental;
     public Condition stamina;
     public Condition hunger;
     public Condition thirsty;
     public Temperature temperature;
 
+    public bool takeRest = false;
+    public bool hasLight = false;
     public bool iswarm; //TODO : 낮 시간대는 따뜻하고 밤 시간대는 춥게
-    public bool isCold = false; //강제로 추운 경우를 위한 가칭
+    //public bool isCold = false; //강제로 추운 경우를 위한 가칭
     private bool isDead = false;
     
     public float noHungerHealthDecay;
@@ -111,14 +113,38 @@ public class Player : MonoBehaviour
         stamina.curValue = stamina.startValue;
         thirsty.curValue = thirsty.startValue;
         temperature.curtemperature = temperature.starttemperature;
+        mental.curValue = mental.startValue;
         iswarm = false;
     }
     
     void Update()
     {
+        if (takeRest)
+        {
+            iswarm = true;
+            hasLight = true;
+        }
+        else
+        {
+            if (GameManager.instance.daytime == _Time.Day)
+            {
+                hasLight = true;
+                iswarm = true;
+            }
+            else
+            {
+                hasLight = false;
+                iswarm = false;
+            }    
+        }
+        
+        
         hunger.Subtract(hunger.decayRate*Time.deltaTime);
         thirsty.Subtract(thirsty.decayRate*Time.deltaTime);
-        stamina.Add(stamina.regenRate*Time.deltaTime);
+        
+        if(!hasLight)
+            mental.Subtract(mental.decayRate*Time.deltaTime);
+        
         if (!iswarm)
             temperature.Cold(temperature.decayRate*Time.deltaTime);
         
@@ -127,18 +153,19 @@ public class Player : MonoBehaviour
         
         if(health.curValue == 0.0f)
             Die();
+        
+        stamina.Add(stamina.regenRate*Time.deltaTime);
 
-        if (!isCold)
-        {
-            if (GameManager.instance.daytime == _Time.Day)
-                iswarm = true;
-            else iswarm = false;
-        }
+       UIUpdate();
+    }
 
+    void UIUpdate()
+    {
         health.uiBar.fillAmount = health.GetPercentage();
         hunger.uiBar.fillAmount = hunger.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
         thirsty.uiBar.fillAmount = thirsty.GetPercentage();
+        mental.uiBar.fillAmount = mental.GetPercentage();
         temperature.moveGauge();
     }
 
@@ -171,6 +198,4 @@ public class Player : MonoBehaviour
         health.Subtract(damageAmount);
         //onTakeDamage?.Invoke();
     }
-
-   
 }

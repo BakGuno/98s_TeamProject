@@ -41,7 +41,7 @@ MonoBehaviour:
         m_State: 1
         m_Disposing: 0
         m_Styles:
-        - rid: 868964018625446351
+        - rid: 868964041594503355
         m_Version: 202231001
     - rid: 868964018625446165
       type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
@@ -78,7 +78,7 @@ MonoBehaviour:
         m_TrainingSetData: []
         m_Name: Default
         m_Description: Default style.
-    - rid: 868964018625446351
+    - rid: 868964041594503355
       type: {class: StyleData, ns: Unity.Muse.StyleTrainer, asm: Unity.Muse.StyleTrainer}
       data:
         m_Guid: 5cc104e0-423a-473e-8034-b9d346cb2357
