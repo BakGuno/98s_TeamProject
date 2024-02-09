@@ -38,7 +38,7 @@ public class Temperature
     public float minTemp;
     
     public Image temperGauge;
-    public Image coldUI;
+    public GameObject coldUI;
     public GameObject hotUI;
    
     
@@ -74,7 +74,7 @@ public class Temperature
         else if (curtemperature < 18.5)
         {
             temperGauge.color = Color.blue;
-            coldUI.enabled = true;
+            coldUI.SetActive(true);
             //TODO : 이동속도 느려지고 데미지?
         }
 
@@ -83,7 +83,7 @@ public class Temperature
             temperGauge.color = Color.black;
             hotUI.SetActive(false);
             
-            coldUI.enabled = false;
+            coldUI.SetActive(false);
         }
     }
 } 
@@ -97,6 +97,7 @@ public class Player : MonoBehaviour
     public Temperature temperature;
 
     public bool iswarm; //TODO : 낮 시간대는 따뜻하고 밤 시간대는 춥게
+    public bool isCold = false; //강제로 추운 경우를 위한 가칭
     private bool isDead = false;
     
     public float noHungerHealthDecay;
@@ -126,6 +127,13 @@ public class Player : MonoBehaviour
         
         if(health.curValue == 0.0f)
             Die();
+
+        if (!isCold)
+        {
+            if (GameManager.instance.daytime == _Time.Day)
+                iswarm = true;
+            else iswarm = false;
+        }
 
         health.uiBar.fillAmount = health.GetPercentage();
         hunger.uiBar.fillAmount = hunger.GetPercentage();

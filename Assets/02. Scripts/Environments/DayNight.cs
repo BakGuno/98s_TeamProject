@@ -28,8 +28,12 @@ public class DayNight : MonoBehaviour
         {
             Reset();
         }
-
         clock.transform.rotation = Quaternion.Euler(0, 0, time * 360f);
+
+        if (time <= 0.25f)
+        {
+            GameManager.instance.daytime = _Time.Night;
+        }
         // if (time <= 0.5)
         //     clock.color = Color.Lerp(clock.color, nightColor,  Time.deltaTime);
     }
@@ -37,6 +41,6 @@ public class DayNight : MonoBehaviour
     private void Reset()
     {
         time = startTime;
-        
+        GameManager.instance.daytime = _Time.Day;
     }
 }
