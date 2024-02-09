@@ -36,9 +36,12 @@ public class Temperature
     public float curtemperature;
     public float maxTemp;
     public float minTemp;
+    
     public Image temperGauge;
     public Image coldUI;
-    public Image hotUI;
+    public GameObject hotUI;
+   
+    
     public float decayRate;
     //TODO ; 추울 때 화면 진동 주면 괜찮겠지?
 
@@ -59,15 +62,16 @@ public class Temperature
 
     public void moveGauge()
     {
-        temperGauge.transform.rotation = Quaternion.Euler(0, 0, (curtemperature / starttemperature) * -90);
-        if (curtemperature > 54.75)
+        temperGauge.transform.rotation = Quaternion.Euler(0, 0, ((curtemperature - starttemperature)/starttemperature) * -90);
+        if (curtemperature > 54)
         {
             temperGauge.color = Color.red;
-            hotUI.enabled = true;
+            hotUI.SetActive(true);
+            
             //TODO : 데미지 입게 해야될 듯
         }
             
-        else if (curtemperature < 18.25)
+        else if (curtemperature < 18.5)
         {
             temperGauge.color = Color.blue;
             coldUI.enabled = true;
@@ -76,8 +80,9 @@ public class Temperature
 
         else
         {
-            temperGauge.color = Color.white;
-            hotUI.enabled = false;
+            temperGauge.color = Color.black;
+            hotUI.SetActive(false);
+            
             coldUI.enabled = false;
         }
     }
