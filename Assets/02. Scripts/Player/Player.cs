@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,6 +37,7 @@ public class Temperature
     public float curtemperature;
     public float maxTemp;
     public float minTemp;
+    
     
     public Image temperGauge;
     public GameObject coldUI;
@@ -104,8 +106,16 @@ public class Player : MonoBehaviour
     
     public float noHungerHealthDecay;
 
+    public CameraShake _cameraShake;
+    public Coroutine _coroutine;
+
     //public event Action onTakeDamage; //TODO : 매개변수가 들어갈 수도 있음.
-    
+
+    private void Awake()
+    {
+        _cameraShake = GetComponent<CameraShake>();
+    }
+
     void Start()
     {
         health.curValue = health.startValue;
@@ -137,16 +147,28 @@ public class Player : MonoBehaviour
                 iswarm = false;
             }    
         }
-        
+        Debug.Log(temperature.temperGauge.transform.rotation.z);
         
         hunger.Subtract(hunger.decayRate*Time.deltaTime);
         thirsty.Subtract(thirsty.decayRate*Time.deltaTime);
         
         if(!hasLight)
             mental.Subtract(mental.decayRate*Time.deltaTime);
-        
+
         if (!iswarm)
+        {
             temperature.Cold(temperature.decayRate*Time.deltaTime);
+            if (temperature.temperGauge.transform.rotation.z >= 0.35 && _coroutine == null)
+            {
+                _cameraShake.StartShake();
+            }
+            else
+            {
+                _cameraShake.StopShake();
+            }
+            //TODO : 카메라 떨림 수정해야됨.
+        }
+
         
         if(hunger.curValue == 0.0f || thirsty.curValue == 0.0f)
             health.Subtract(noHungerHealthDecay*Time.deltaTime);
