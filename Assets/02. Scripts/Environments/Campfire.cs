@@ -19,6 +19,7 @@ public class Campfire : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
         if (other.CompareTag("Player"))
         {
             _player = other.GetComponent<Player>();

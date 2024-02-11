@@ -6,8 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Condition
 {
-    [HideInInspector]
-    public float curValue;
+    [HideInInspector] public float curValue;
     public float maxValue;
     public float startValue;
     public float regenRate;
@@ -23,6 +22,7 @@ public class Condition
     {
         curValue = Mathf.Max(curValue - amount, 0.0f); //0보다는 낮아지지 않게
     }
+
     public float GetPercentage()
     {
         return curValue / maxValue;
@@ -32,18 +32,17 @@ public class Condition
 [System.Serializable]
 public class Temperature
 {
-    [HideInInspector]
-    public float starttemperature;
+    [HideInInspector] public float starttemperature;
     public float curtemperature;
     public float maxTemp;
     public float minTemp;
-    
-    
+
+
     public Image temperGauge;
     public GameObject coldUI;
     public GameObject hotUI;
-   
-    
+
+
     public float decayRate;
     //TODO ; 추울 때 화면 진동 주면 괜찮겠지?
 
@@ -52,27 +51,27 @@ public class Temperature
         curtemperature += heat;
         if (curtemperature >= maxTemp)
             curtemperature = maxTemp;
-        
     }
 
     public void Cold(float heat)
     {
         curtemperature -= heat;
-        if (curtemperature <=minTemp)
+        if (curtemperature <= minTemp)
             curtemperature = minTemp;
     }
 
     public void moveGauge()
     {
-        temperGauge.transform.rotation = Quaternion.Euler(0, 0, ((curtemperature - starttemperature)/starttemperature) * -90);
+        temperGauge.transform.rotation =
+            Quaternion.Euler(0, 0, ((curtemperature - starttemperature) / starttemperature) * -90);
         if (curtemperature > 54)
         {
             temperGauge.color = Color.red;
             hotUI.SetActive(true);
-            
+
             //TODO : 데미지 입게 해야될 듯
         }
-            
+
         else if (curtemperature < 18.5)
         {
             temperGauge.color = Color.blue;
@@ -87,7 +86,7 @@ public class Temperature
             coldUI.SetActive(false);
         }
     }
-} 
+}
 
 public class Player : MonoBehaviour
 {
@@ -100,10 +99,12 @@ public class Player : MonoBehaviour
 
     public bool takeRest = false;
     public bool hasLight = false;
+
     public bool iswarm; //TODO : 낮 시간대는 따뜻하고 밤 시간대는 춥게
+
     //public bool isCold = false; //강제로 추운 경우를 위한 가칭
     private bool isDead = false;
-    
+
     public float noHungerHealthDecay;
 
     public CameraShake _cameraShake;
@@ -126,7 +127,7 @@ public class Player : MonoBehaviour
         mental.curValue = mental.startValue;
         iswarm = false;
     }
-    
+
     void Update()
     {
         if (takeRest)
@@ -145,40 +146,39 @@ public class Player : MonoBehaviour
             {
                 hasLight = false;
                 iswarm = false;
-            }    
+            }
         }
-        Debug.Log(temperature.temperGauge.transform.rotation.z);
-        
-        hunger.Subtract(hunger.decayRate*Time.deltaTime);
-        thirsty.Subtract(thirsty.decayRate*Time.deltaTime);
-        
-        if(!hasLight)
-            mental.Subtract(mental.decayRate*Time.deltaTime);
+        hunger.Subtract(hunger.decayRate * Time.deltaTime);
+        thirsty.Subtract(thirsty.decayRate * Time.deltaTime);
+
+        if (!hasLight)
+            mental.Subtract(mental.decayRate * Time.deltaTime);
 
         if (!iswarm)
         {
-            temperature.Cold(temperature.decayRate*Time.deltaTime);
-            if (temperature.temperGauge.transform.rotation.z >= 0.35 && _coroutine == null)
-            {
-                _cameraShake.StartShake();
-            }
-            else
-            {
-                _cameraShake.StopShake();
-            }
-            //TODO : 카메라 떨림 수정해야됨.
+            temperature.Cold(temperature.decayRate * Time.deltaTime);
         }
 
-        
-        if(hunger.curValue == 0.0f || thirsty.curValue == 0.0f)
-            health.Subtract(noHungerHealthDecay*Time.deltaTime);
-        
-        if(health.curValue == 0.0f)
-            Die();
-        
-        stamina.Add(stamina.regenRate*Time.deltaTime);
+        if (temperature.temperGauge.transform.rotation.z >= 0.35 && _coroutine == null)
+        {
+            _cameraShake.StartShake();
+        }
+        else
+        {
+            _cameraShake.StopShake();
+        }
+        //TODO : 카메라 떨림 수정해야됨. 밖으로 뺴니까 생각하던것처럼 동작하긴 하는데 코드는 이런게 아님.
 
-       UIUpdate();
+
+        if (hunger.curValue == 0.0f || thirsty.curValue == 0.0f)
+            health.Subtract(noHungerHealthDecay * Time.deltaTime);
+
+        if (health.curValue == 0.0f)
+            Die();
+
+        stamina.Add(stamina.regenRate * Time.deltaTime);
+
+        UIUpdate();
     }
 
     void UIUpdate()
@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
     {
         if (stamina.curValue - amount < 0)
             return false;
-        
+
         stamina.Subtract(amount);
         return true;
     }
@@ -220,4 +220,6 @@ public class Player : MonoBehaviour
         health.Subtract(damageAmount);
         //onTakeDamage?.Invoke();
     }
+    
+    //public void on
 }
