@@ -12,7 +12,8 @@ public class CameraShake : MonoBehaviour
     public float shakeIntensity = 0.1f;
     public float shakeSpeed = 50.0f;
 
-    private WaitForSeconds wait = new WaitForSeconds(1f);
+    private WaitForSeconds wait = new WaitForSeconds(2f);
+    private float shakeDuration = 2f;
 
     // 원래 카메라의 위치
     private Vector3 originalPos;
@@ -33,6 +34,10 @@ public class CameraShake : MonoBehaviour
 
     public void StartShake()
     {
+        if (GameManager.instance.player._coroutine != null)
+        {
+            return;
+        }
         GameManager.instance.player._coroutine = StartCoroutine(nameof(Shake));
     }
 
@@ -48,12 +53,18 @@ public class CameraShake : MonoBehaviour
     {
         while (true)
         {
-            Vector3 shakePos = originalPos + Random.insideUnitSphere * shakeIntensity;
-            _cameraTransform.localPosition =
-                Vector3.Lerp(_cameraTransform.localPosition, shakePos, Time.deltaTime * shakeSpeed);
+            float shakeTime = 0f;
+            while (shakeTime < shakeDuration)
+            {
+                shakeTime += Time.deltaTime;
+                Vector3 shakePos = originalPos + Random.insideUnitSphere * shakeIntensity;
+                _cameraTransform.localPosition =
+                    Vector3.Lerp(_cameraTransform.localPosition, shakePos, Time.deltaTime * shakeSpeed);
+                yield return null;    
+            }
+            Debug.Log("1");
             yield return wait;
-            _cameraTransform.localPosition = originalPos;
-            yield return wait;
+            
         }
     }
 }

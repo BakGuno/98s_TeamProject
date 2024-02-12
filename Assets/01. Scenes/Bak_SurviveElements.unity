@@ -2602,8 +2602,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911082989}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.02, y: 1, z: 0.03}
+  m_LocalRotation: {x: -0, y: -0.6837713, z: -0, w: 0.7296964}
+  m_LocalPosition: {x: 14.76, y: 1, z: 0.030000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2611,7 +2611,7 @@ Transform:
   - {fileID: 1719146085}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -86.278, z: 0}
 --- !u!114 &1911082994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2795,7 +2795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1941484315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3133,6 +3133,10 @@ PrefabInstance:
     - target: {fileID: 5714331852251627205, guid: 6c45bb7555cc21642b97f5990c03fd70, type: 3}
       propertyPath: m_Name
       value: Torch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5714331852251627205, guid: 6c45bb7555cc21642b97f5990c03fd70, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

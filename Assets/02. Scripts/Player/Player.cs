@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
 
     //public bool isCold = false; //강제로 추운 경우를 위한 가칭
     private bool isDead = false;
+    private bool isCold;
 
     public float noHungerHealthDecay;
 
@@ -126,6 +127,7 @@ public class Player : MonoBehaviour
         temperature.curtemperature = temperature.starttemperature;
         mental.curValue = mental.startValue;
         iswarm = false;
+        isCold = false;
     }
 
     void Update()
@@ -148,6 +150,7 @@ public class Player : MonoBehaviour
                 iswarm = false;
             }
         }
+
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
         thirsty.Subtract(thirsty.decayRate * Time.deltaTime);
 
@@ -159,7 +162,7 @@ public class Player : MonoBehaviour
             temperature.Cold(temperature.decayRate * Time.deltaTime);
         }
 
-        if (temperature.temperGauge.transform.rotation.z >= 0.35 && _coroutine == null)
+        if (temperature.temperGauge.transform.rotation.z >= 0.35)
         {
             _cameraShake.StartShake();
         }
@@ -220,6 +223,6 @@ public class Player : MonoBehaviour
         health.Subtract(damageAmount);
         //onTakeDamage?.Invoke();
     }
-    
+
     //public void on
 }
