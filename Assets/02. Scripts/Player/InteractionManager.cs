@@ -22,11 +22,12 @@ public class InteractionManager : MonoBehaviour
 
     public TextMeshProUGUI promptText;
     private Camera camera;
+    private Animator _animator;
  
     void Start()
     {
         camera =Camera.main;
-        
+        _animator = GetComponent<Animator>();
     }
 
 
@@ -71,6 +72,7 @@ public class InteractionManager : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
+            _animator.SetTrigger("Gathering");
             curInteractable.OnInteract();
             curInteractGameObject = null;
             curInteractable = null;

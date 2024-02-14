@@ -26,6 +26,7 @@ public class EquipManager : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed && curEquip != null&&_controller.canLook)
         {
+            _player._animator.SetTrigger("Attack");
             curEquip.OnAttackInput(_player);
         }
     }

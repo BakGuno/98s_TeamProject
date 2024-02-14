@@ -25,10 +25,12 @@ public class PlayerMovements : MonoBehaviour
     [HideInInspector] public bool canLook = true;
 
     private Rigidbody _rigidbody;
+    private Animator _animator;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -47,8 +49,8 @@ public class PlayerMovements : MonoBehaviour
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y;
-
         _rigidbody.velocity = dir;
+        
     }
 
     private void LateUpdate()
@@ -64,10 +66,12 @@ public class PlayerMovements : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
+            _animator.SetBool("Move",true);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
+            _animator.SetBool("Move",false);
         }
     }
 
@@ -91,9 +95,20 @@ public class PlayerMovements : MonoBehaviour
         {
             if (IsGrounded())
             {
+                _animator.SetTrigger("Jump");
                 _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
             }
         }
+    }
+
+    public void OnSprintInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            _animator.SetBool("Sprint",true);
+        }
+        else if(context.phase == InputActionPhase.Canceled)
+            _animator.SetBool("Sprint",false);
     }
 
     private bool IsGrounded()

@@ -29,13 +29,16 @@ public class EquipTool :  Equip
 
   public override void OnAttackInput(Player conditions)
   {
-      if (!attacking)
+      if (doesGatherResources || doesDealDamage)
       {
-          if (conditions.UseStamina(useStamina)) //스태미나가 있을때만 공격할 수 있게
+          if (!attacking)
           {
-              attacking = true;
-              _animator.SetTrigger("Attack");
-              Invoke("OnCanAttack", attackRate);
+              if (conditions.UseStamina(useStamina)) //스태미나가 있을때만 공격할 수 있게
+              {
+                  attacking = true;
+                  _animator.SetTrigger("Attack");
+                  Invoke("OnCanAttack", attackRate);
+              }
           }
       }
   }

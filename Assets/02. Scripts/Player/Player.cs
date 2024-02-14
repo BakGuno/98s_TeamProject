@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -115,12 +116,14 @@ public class Player : MonoBehaviour,IDamagable
 
     public CameraShake _cameraShake;
     public Coroutine _coroutine;
+    public Animator _animator;
 
-    //public event Action onTakeDamage; //TODO : 매개변수가 들어갈 수도 있음.
+    public UnityEvent onTakeDamage; //TODO : 데미지 인디케이터 UI 등록하기.
 
     private void Awake()
     {
         _cameraShake = GetComponent<CameraShake>();
+        _animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -225,16 +228,13 @@ public class Player : MonoBehaviour,IDamagable
     public void Die()
     {
         isDead = true;
+        _animator.SetBool("Dead",true);
     }
 
-    public void TakePhysicalDamage(int damageAmount)
+    public void TakePhysicalDamage(int damageAmount)//TODO : 가능하다면 시간으로 데미지캡 씌울 것.
     {
         health.Subtract(damageAmount);
-        //onTakeDamage?.Invoke();//TODO : 애니메이션 
-    }
-
-    private void OnTriggerEnter(Collider other) //TODO : 다른 열,광원들을 하나의 스크립트로 뭉치고, 값을 다르게 줘서 동작시켜보자.
-    {
-        Debug.Log(other.name);
+        _animator.SetTrigger("Hit");
+        onTakeDamage?.Invoke(); 
     }
 }
