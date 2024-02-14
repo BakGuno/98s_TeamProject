@@ -8,58 +8,28 @@ public class Torch : MonoBehaviour
 {
     [CanBeNull] private Player _player;
     public Transform handPosition;
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     
-    //     _player = other.GetComponent<Player>();
-    //     if (_player != null)
-    //     {
-    //         _player.takeRest = true;
-    //     }
-    // }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         _player = other.GetComponent<Player>();     
-    //         if (_player != null)
-    //         {
-    //             _player.takeRest = true;
-    //         }
-    //     }
-    // }
-
-    private void OnTriggerStay(Collider other)
+   
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             _player = other.GetComponent<Player>();     
             if (_player != null)
             {
+                _player.hasTorch = true;
                 _player.takeRest = true;
             }
         }
     }
-    
-  
 
-    private void OnTriggerExit(Collider other)
+
+    private void OnDestroy()
     {
-        if (other.CompareTag("Player"))
+        if (_player != null)
         {
-            if (_player != null)
-            {
-                _player.takeRest = true;
-            }
-            _player = null;
+            _player.takeRest = false;
+            _player.hasTorch = false;
         }
-    }
-
-    private void Update()
-    {
-        gameObject.transform.position = new Vector3(handPosition.transform.position.x + 0.5f,
-            handPosition.transform.position.y, handPosition.transform.position.z + 0.9f);
+        _player = null;
     }
 }

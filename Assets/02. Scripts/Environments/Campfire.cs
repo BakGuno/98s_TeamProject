@@ -12,7 +12,7 @@ public class Campfire : MonoBehaviour
     {
         if (_player != null)
         {
-            _player.takeRest = true;
+            
             _player.temperature.Heat(heat*Time.deltaTime);
         }
     }
@@ -21,15 +21,20 @@ public class Campfire : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _player = other.GetComponent<Player>();
+            _player = other.GetComponent<Player>();    
+            if (!_player.hasTorch)
+            {
+                _player.takeRest = true;
+            }
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            _player.takeRest = false;
+            if(!_player.hasTorch)
+                _player.takeRest = false;
             _player = null;
         }
     }

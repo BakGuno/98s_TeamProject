@@ -3,6 +3,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+public interface IDamagable
+{
+    void TakePhysicalDamage(int damageAmount);
+}
+
 [System.Serializable]
 public class Condition
 {
@@ -88,7 +93,7 @@ public class Temperature
     }
 }
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,IDamagable
 {
     public Condition health;
     public Condition mental;
@@ -101,10 +106,10 @@ public class Player : MonoBehaviour
     public bool hasLight = false;
 
     public bool iswarm; //TODO : 낮 시간대는 따뜻하고 밤 시간대는 춥게
-
-    //public bool isCold = false; //강제로 추운 경우를 위한 가칭
+    public bool hasTorch = false;
     private bool isDead = false;
     private bool isCold;
+    
 
     public float noHungerHealthDecay;
 
@@ -132,20 +137,24 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (takeRest)
+        if (takeRest) //TODO : 리지드바디 넣어서 자식오브젝트로 동작시킬꺼면 여기도 손봐야됨(횃불 꺼질때 takeRest도 꺼지게)
         {
             iswarm = true;
             hasLight = true;
         }
         else
         {
+            
             if (GameManager.instance.daytime == _Time.Day)
             {
+                
                 hasLight = true;
                 iswarm = true;
+                
             }
             else
             {
+                
                 hasLight = false;
                 iswarm = false;
             }
@@ -221,8 +230,11 @@ public class Player : MonoBehaviour
     public void TakePhysicalDamage(int damageAmount)
     {
         health.Subtract(damageAmount);
-        //onTakeDamage?.Invoke();
+        //onTakeDamage?.Invoke();//TODO : 애니메이션 
     }
 
-    //public void on
+    private void OnTriggerEnter(Collider other) //TODO : 다른 열,광원들을 하나의 스크립트로 뭉치고, 값을 다르게 줘서 동작시켜보자.
+    {
+        Debug.Log(other.name);
+    }
 }

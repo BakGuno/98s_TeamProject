@@ -14,6 +14,7 @@ public class CameraShake : MonoBehaviour
 
     private WaitForSeconds wait = new WaitForSeconds(2f);
     private float shakeDuration = 2f;
+    private bool isShake = false;
 
     // 원래 카메라의 위치
     private Vector3 originalPos;
@@ -39,20 +40,22 @@ public class CameraShake : MonoBehaviour
             return;
         }
         GameManager.instance.player._coroutine = StartCoroutine(nameof(Shake));
+        isShake = true;
     }
 
     public void StopShake()
     {
-        StopCoroutine(nameof(Shake));
-        _cameraTransform.localPosition = originalPos;
+        //StopCoroutine(nameof(Shake));
+        isShake = false;
         GameManager.instance.player._coroutine = null;
     }
 
     // 카메라 흔들기 함수
-    public IEnumerator Shake()
+    public IEnumerator Shake() //TODO : 좋아보이진 않는다. 다시 검토할 필요가 있음
     {
-        while (true)
+        while (isShake) //요기 / 코루틴은 사용하면 항상 파괴점이 있어야하는데 여기는 없음.
         {
+            
             float shakeTime = 0f;
             while (shakeTime < shakeDuration)
             {
@@ -62,9 +65,8 @@ public class CameraShake : MonoBehaviour
                     Vector3.Lerp(_cameraTransform.localPosition, shakePos, Time.deltaTime * shakeSpeed);
                 yield return null;    
             }
-            Debug.Log("1");
             yield return wait;
-            
         }
+        _cameraTransform.localPosition = originalPos;
     }
 }
