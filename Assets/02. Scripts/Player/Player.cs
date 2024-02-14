@@ -12,7 +12,7 @@ public interface IDamagable
 [System.Serializable]
 public class Condition
 {
-    [HideInInspector] public float curValue;
+    public float curValue;
     public float maxValue;
     public float startValue;
     public float regenRate;
@@ -119,6 +119,7 @@ public class Player : MonoBehaviour,IDamagable
     public Animator _animator;
 
     public UnityEvent onTakeDamage; //TODO : 데미지 인디케이터 UI 등록하기.
+    public event Action OnDieEvnet;
 
     private void Awake()
     {
@@ -227,8 +228,19 @@ public class Player : MonoBehaviour,IDamagable
 
     public void Die()
     {
+        if (isDead)
+        {
+            Debug.Log(isDead);
+            return;
+        }
+        Debug.Log(isDead);    
         isDead = true;
-        _animator.SetBool("Dead",true);
+        _animator.SetTrigger("Dead");
+        OnDieEvnet?.Invoke();
+        // foreach (Behaviour obj in transform.GetComponentsInChildren<Behaviour>())
+        // {
+        //     obj.enabled = false;
+        // }
     }
 
     public void TakePhysicalDamage(int damageAmount)//TODO : 가능하다면 시간으로 데미지캡 씌울 것.

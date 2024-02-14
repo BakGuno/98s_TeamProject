@@ -25,17 +25,18 @@ public class PlayerMovements : MonoBehaviour
     [HideInInspector] public bool canLook = true;
 
     private Rigidbody _rigidbody;
-    private Animator _animator;
+    private Player _player;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
+        _player = GetComponent<Player>();
     }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        _player.OnDieEvnet += OnDie;
     }
 
 
@@ -66,12 +67,12 @@ public class PlayerMovements : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
-            _animator.SetBool("Move",true);
+            _player._animator.SetBool("Move",true);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
-            _animator.SetBool("Move",false);
+            _player._animator.SetBool("Move",false);
         }
     }
 
@@ -95,7 +96,7 @@ public class PlayerMovements : MonoBehaviour
         {
             if (IsGrounded())
             {
-                _animator.SetTrigger("Jump");
+                _player._animator.SetTrigger("Jump");
                 _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
             }
         }
@@ -105,10 +106,10 @@ public class PlayerMovements : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            _animator.SetBool("Sprint",true);
+            _player._animator.SetBool("Sprint",true);
         }
         else if(context.phase == InputActionPhase.Canceled)
-            _animator.SetBool("Sprint",false);
+            _player._animator.SetBool("Sprint",false);
     }
 
     private bool IsGrounded()
@@ -145,5 +146,10 @@ public class PlayerMovements : MonoBehaviour
     {
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
+    }
+
+    void OnDie()
+    {
+        this.enabled = false;
     }
 }
