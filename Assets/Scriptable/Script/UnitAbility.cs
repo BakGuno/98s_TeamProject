@@ -14,11 +14,11 @@ public class UnitAbility : ScriptableObject
     [Header("Info")]
     public string UnitName;
     public MonsterType type;
-    public float hp;
-    public float stamina;
+    public int hp;
+    public int stamina;
     [Header("Power")]
-    public float offensePower;
-    public float defensePower;
+    public int offensePower;
+    public int defensePower;
     [Header("Speed")]
     public float moveSpeed;
     public float attackSpeed;

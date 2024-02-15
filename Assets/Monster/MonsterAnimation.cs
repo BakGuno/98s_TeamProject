@@ -39,6 +39,11 @@ public class MonsterAnimation : MonoBehaviour
                     _animator.SetBool("WalkForward", false);
                     _animator.SetBool("RunForward", false);
                     break;
+                case "Fox":
+                    _animator.SetBool("Idle", true);
+                    _animator.SetBool("WalkForward", false);
+                    _animator.SetBool("RunForward", false);
+                    break;
                 case "Rabbit":
                     _animator.SetBool("Idle", true);
                     _animator.SetBool("WalkForward", false);
@@ -51,6 +56,11 @@ public class MonsterAnimation : MonoBehaviour
         switch (_controller.monsterName)
         {
             case "Bear":
+                _animator.SetBool("Idle", false);
+                _animator.SetBool("WalkForward", false);
+                _animator.SetBool("RunForward", true);
+                break;
+            case "Fox":
                 _animator.SetBool("Idle", false);
                 _animator.SetBool("WalkForward", false);
                 _animator.SetBool("RunForward", true);
@@ -82,10 +92,10 @@ public class MonsterAnimation : MonoBehaviour
     // Attck
     public AttackType AttackAnimation(string name)
     {
+        float randomAttackType = UnityEngine.Random.Range(1f, 100f);
         switch (name)
         {
             case "Bear":
-                float randomAttackType = UnityEngine.Random.Range(1f, 100f);
 
                 if (randomAttackType <= 30 && randomAttackType > 0)
                 {
@@ -119,6 +129,18 @@ public class MonsterAnimation : MonoBehaviour
                 }
                 break;
             case "Fox":
+                if (randomAttackType <= 60 && randomAttackType > 0)
+                {
+                    _animator.SetBool("RunForward", false);
+                    _animator.SetTrigger("Attack1");
+                    attackType = AttackType.RightAttack;
+                }
+                else if (randomAttackType <= 100 && randomAttackType > 60)
+                {
+                    _animator.SetBool("RunForward", false);
+                    _animator.SetTrigger("Attack2");
+                    attackType = AttackType.LeftAttack;
+                }
                 break;
         }
         return attackType;

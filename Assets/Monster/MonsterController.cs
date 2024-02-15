@@ -8,7 +8,7 @@ using UnityEngine.AI;
 using static MonsterAnimation;
 using static UnityEditor.FilePathAttribute;
 
-public class MonsterController : MonoBehaviour
+public class MonsterController : MonoBehaviour, IDamagable
 {
     [Header("Nav")]
     [SerializeField] protected Transform target;
@@ -23,11 +23,14 @@ public class MonsterController : MonoBehaviour
     protected MonsterController _monsterController;
     protected MonsterDamageHit _monsterDamageHit;
 
+    protected IDamagable damagable;
+
     [HideInInspector]
     public string monsterName;
-    protected float hp;
-    protected float ad;
-    protected float df;
+    protected int hp;
+    protected int maxhp;
+    protected int ad;
+    protected int df;
     protected float moveSpeed;
     protected float adSpeed;
     protected MonsterType monsterType;
@@ -61,6 +64,7 @@ public class MonsterController : MonoBehaviour
         //Monster Info
         monsterName = unitAbility.name;
         hp = unitAbility.hp;
+        maxhp = unitAbility.hp;
         ad = unitAbility.offensePower;
         df = unitAbility.defensePower;
         adSpeed = unitAbility.attackSpeed;
@@ -70,7 +74,7 @@ public class MonsterController : MonoBehaviour
         rayExtent = unitAbility.ExtentRange;
 
         nvAgent.speed = unitAbility.moveSpeed;
-
+        hp -= 1;
         StartCoroutine(StateMachine());
     }
     private IEnumerator StateMachine()
@@ -84,6 +88,7 @@ public class MonsterController : MonoBehaviour
     private IEnumerator IDLE()
     {
         _MonsterAnimator.IdleAnimation();
+        _rigidbody.velocity = Vector3.zero;
 
         int dir = UnityEngine.Random.Range(0f, 1f) > 0.5f ? 1 : -1;
         float lookSpeed = UnityEngine.Random.Range(25f, 100f);
@@ -133,23 +138,16 @@ public class MonsterController : MonoBehaviour
         {
             nvAgent.isStopped = true;
         }
-        switch (monsterName)
+        AttackType attackType = _MonsterAnimator.AttackAnimation(monsterName);
+        yield return new WaitForSeconds(_MonsterAnimator.StateInfo());
+        if (_hit.collider != null && _hit.collider.name == "Player")
         {
-            case "Bear":
-                AttackType attackType = _MonsterAnimator.AttackAnimation(monsterName);
-
-                yield return new WaitForSeconds(_MonsterAnimator.StateInfo() - 1f);
-                if (_hit.collider.name != null && attackType != AttackType.ButtAttack)
-                {
-                    Attack(_hit.collider.name, monsterName, attackType);
-                }
-                else if (attackType == AttackType.ButtAttack)
-                {
-                    Attack(_hit.collider.name, monsterName, attackType);
-                }
-                break;
+            Attack(monsterName, attackType);
         }
-
+        else if (_hit.collider == null || _hit.collider.name != "Player")
+        {
+            ChangeState(State.RUN);
+        }
         yield return new WaitForSeconds(unitAbility.attackSpeed);
     }
     private IEnumerator DEATH()
@@ -173,7 +171,17 @@ public class MonsterController : MonoBehaviour
                 }
                 break;
             case MonsterType.neutrality:
-
+                switch (other.name)
+                {
+                    case "Player":
+                        if (hp < maxhp)
+                        {
+                            ChangeState(State.RUN);
+                            StopAllCoroutines();
+                            StartCoroutine(StateMachine());
+                        }
+                        break;
+                }
                 break;
             case MonsterType.friendly:
                 switch (other.name)
@@ -204,7 +212,19 @@ public class MonsterController : MonoBehaviour
                 }
                 break;
             case MonsterType.neutrality:
-
+                switch (other.name)
+                {
+                    case "Player":
+                        if (hp < maxhp)
+                        {
+                            if (state == State.RUN)
+                            {
+                                target = other.transform;
+                                nvAgent.SetDestination(target.position);
+                            }
+                        }
+                        break;
+                }
                 break;
             case MonsterType.friendly:
                 switch (other.name)
@@ -234,6 +254,17 @@ public class MonsterController : MonoBehaviour
                 }
                 break;
             case MonsterType.neutrality:
+                if (hp < maxhp)
+                {
+                    switch (other.name)
+                    {
+                        case "Player":
+                            nvAgent.SetDestination(transform.position);
+                            target = null;
+                            ChangeState(State.IDLE);
+                            break;
+                    }
+                }
                 break;
             case MonsterType.friendly:
                 switch (other.name)
@@ -251,33 +282,31 @@ public class MonsterController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (state != State.IDLE)
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
         if (monsterType != MonsterType.friendly)
         {
             if (Physics.SphereCast(transform.position, transform.transform.lossyScale.x * rayExtent, transform.forward, out _hit, rayRange))
             {
                 if (_hit.collider.name == "Player")
                 {
+                    damagable = _hit.collider.GetComponent<IDamagable>();
                     switch (monsterName)
                     {
                         case "Bear":
-                            nvAgent.stoppingDistance = 2.5f;
                             ChangeState(State.ATTACK);
                             break;
                         case "Fox":
+                            ChangeState(State.ATTACK);
                             break;
                     }
                 }
             }
-            else
-            {
-                if (target != null)
-                {
-                    ChangeState(State.RUN);
-                }
-            }
         }
     }
-    protected void Attack(string damageName, string monsterName, AttackType type)
+    protected void Attack(string monsterName, AttackType type)
     {
         switch (monsterName)
         {
@@ -285,16 +314,16 @@ public class MonsterController : MonoBehaviour
                 switch (type)
                 {
                     case AttackType.RightAttack:
-                        Debug.Log("RightAttack");
+                        damagable.TakePhysicalDamage(ad);
                         break;
                     case AttackType.LeftAttack:
-                        Debug.Log("LeftAttack");
+                        damagable.TakePhysicalDamage(ad);
                         break;
                     case AttackType.BiteAttack:
-                        Debug.Log("BiteAttack");
+                        damagable.TakePhysicalDamage(ad + 10);
                         break;
                     case AttackType.StrongAttack:
-                        Debug.Log("StrongAttack");
+                        damagable.TakePhysicalDamage(ad + 20);
                         break;
                     case AttackType.ButtAttack:
                         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
@@ -309,6 +338,15 @@ public class MonsterController : MonoBehaviour
                 }
                 break;
             case "Fox":
+                switch (type)
+                {
+                    case AttackType.RightAttack:
+                        damagable.TakePhysicalDamage(ad);
+                        break;
+                    case AttackType.LeftAttack:
+                        damagable.TakePhysicalDamage(ad + 10);
+                        break;
+                }
                 break;
         }
     }
@@ -327,9 +365,18 @@ public class MonsterController : MonoBehaviour
             return transform.position;
         }
     }
-    public void DamageHit()
+    public void DamageHit(int damage)
     {
+        hp -= Math.Clamp((damage - df), 0, 999);
+        if (monsterName == "Bear")
+        {
+            _MonsterAnimator.HitAnimation();
+        }
         _monsterDamageHit.Hit();
-        _MonsterAnimator.HitAnimation();
+    }
+
+    public void TakePhysicalDamage(int damageAmount)
+    {
+        DamageHit(damageAmount);
     }
 }
