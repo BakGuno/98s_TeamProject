@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.77162606, g: 0.9106046, b: 0.9955186, a: 1}
+  m_IndirectSpecularColor: {r: 0.77192277, g: 0.91063267, b: 0.9955103, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18494,14 +18494,6 @@ PrefabInstance:
     - target: {fileID: 2565167163373689578, guid: 58b4e322c101d2f47a61a037aea73dc5, type: 3}
       propertyPath: m_Name
       value: Campfire
-      objectReference: {fileID: 0}
-    - target: {fileID: 2565167163373689578, guid: 58b4e322c101d2f47a61a037aea73dc5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7650614187745408502, guid: 58b4e322c101d2f47a61a037aea73dc5, type: 3}
-      propertyPath: heat
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

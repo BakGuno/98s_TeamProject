@@ -215,6 +215,7 @@ public class Inventory : MonoBehaviour
                         break;
                     case ConsumableType.목마름:
                         _player.Drink(selectedItem.item.consumables[i].value);
+                        _player.temperature.curtemperature--;
                         break;
                 }
             }
