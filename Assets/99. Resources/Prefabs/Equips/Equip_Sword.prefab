@@ -52,7 +52,7 @@ MonoBehaviour:
   useStamina: 10
   doesGatherResources: 0
   doesDealDamage: 1
-  damage: 20
+  damage: 50
 --- !u!54 &4797507943692514069
 Rigidbody:
   m_ObjectHideFlags: 0
