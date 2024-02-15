@@ -99,7 +99,8 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
+    // 브금을 틀고자 하는 부분에서 아래와 같이 호출
+    // AudioManager.instance.BGMPlay(BGM.Day);
     public void BGMPlay(BGM bgm)
     {
         bgmPlayer.clip = _bgmClip[(int)bgm];
@@ -118,12 +119,16 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.Play();
     }
 
+
+    // 음향 효과를 적용하고자 하는 부분에서 아래와 같이 호출
+    // AudioManager.instance.ApplyLowPassFilter();
     public void ApplyLowPassFilter() // 소리 먹먹해짐
     {
         if (_audioMixer != null)
             _audioMixer.FindSnapshot("BGM_LowpassFilter").TransitionTo(0);
     }
 
+    // 리셋 : AudioManager.instance.ResetAudioEffect();
     public void ResetAudioEffect()
     {
         if (_audioMixer != null)
