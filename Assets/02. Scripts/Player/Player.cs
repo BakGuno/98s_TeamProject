@@ -298,6 +298,11 @@ public class Player : MonoBehaviour,IDamagable
     public void TakePhysicalBuff(int damageAmount)
     {
         stamina.Subtract(damageAmount);
+        StartBuffShake();
         onTakeButt?.Invoke();
+    }
+    void StartBuffShake()
+    {
+        _cameraShake.StartShake();
     }
 }
