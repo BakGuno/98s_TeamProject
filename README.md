@@ -13,6 +13,9 @@
 ## 개발 환경
   - Unity 3.2f
 
+## 변경 사항
+1. 메인 씬 저장위치, 이름 변경
+
 ## 팀 노션
 [구8's Tema Notion](https://www.notion.so/8-3c2656c45f82409c861232bcfbab2094)
 ## 구현 내용 
