@@ -108,7 +108,6 @@ public class CraftMenu : MonoBehaviour
         if(Physics.Raycast(player.position, player.forward, out hitInfo ,range, layerMask))
         {
             go_Preview.SetActive(true);
-            Debug.Log("레이 도달함");
             if (hitInfo.transform != null)
             {
                 if (Input.GetKeyDown(KeyCode.Q))

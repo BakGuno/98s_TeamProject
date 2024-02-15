@@ -58,8 +58,6 @@ public class EquipTool :  Equip
 
       if (Physics.Raycast(ray, out hit, attackDistance))
       {
-          Debug.Log(Vector3.Distance(_camera.transform.position,hit.collider.transform.position));
-          Debug.Log(hit.collider.transform.name);
           if (doesGatherResources && hit.collider.TryGetComponent(out GatherResource resource)) //TODO : Resource = 자원용 스크립트 얘기함.
           {
               resource.Gather(hit.point,hit.normal);
