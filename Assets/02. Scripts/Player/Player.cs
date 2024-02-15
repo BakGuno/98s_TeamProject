@@ -129,8 +129,8 @@ public class Player : MonoBehaviour,IDamagable
     public event Action OnDieEvnet;
 
     private PlayerMovements _movements;
-    
-    
+
+    public GameObject mentalWarnUI;
 
     private void Awake()
     {
@@ -230,6 +230,10 @@ public class Player : MonoBehaviour,IDamagable
         {
             stamina.Add(stamina.regenRate * Time.deltaTime);    
         }
+        
+        if (mental.GetPercentage() <=0.35f)
+            mentalWarnUI.SetActive(true);
+        else mentalWarnUI.SetActive(false);
 
         UIUpdate();
     }

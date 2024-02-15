@@ -246,6 +246,7 @@ public class MonsterController : MonoBehaviour, IDamagable
                 switch (other.name)
                 {
                     case "Player":
+                        other.GetComponent<Player>().mental.Add(1*Time.deltaTime); //토끼로 정신력 보양
                         if (!friendlyMove)
                         {
                             friendlyMove = true;

@@ -999,12 +999,14 @@ GameObject:
   - component: {fileID: 1438546959266459337}
   - component: {fileID: 4540229000190281644}
   - component: {fileID: 7756282881668563433}
+  - component: {fileID: 1614197331181267106}
   - component: {fileID: 4575255673969955361}
   - component: {fileID: 438552162805765884}
   - component: {fileID: 2028728755242575730}
   - component: {fileID: 6312981713099860178}
   - component: {fileID: 372247988216511346}
   - component: {fileID: 571646308444885342}
+  - component: {fileID: 6236919215018472209}
   - component: {fileID: 2744209642635489210}
   - component: {fileID: 1894057287003944615}
   m_Layer: 8
@@ -1030,6 +1032,7 @@ Transform:
   - {fileID: 2339865049046370806}
   - {fileID: 2226848932396265275}
   - {fileID: 1347356595983577468}
+  - {fileID: 4031903348758621231}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1076,7 +1079,7 @@ MonoBehaviour:
   mental:
     curValue: 0
     maxValue: 100
-    startValue: 100
+    startValue: 50
     regenRate: 0
     decayRate: 1
     uiBar: {fileID: 0}
@@ -1114,7 +1117,11 @@ MonoBehaviour:
   hasLight: 0
   iswarm: 0
   hasTorch: 0
+  isDead: 0
+  isrun: 0
   noHungerHealthDecay: 5
+  useSprintStamina: 10
+  thirstyMultiplier: 1
   _cameraShake: {fileID: 0}
   _animator: {fileID: 0}
   onTakeDamage:
@@ -1132,6 +1139,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTakeButt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DamageIndicator, Assembly-CSharp
+        m_MethodName: Buff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  mentalWarnUI: {fileID: 0}
+--- !u!114 &1614197331181267106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501690864755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce0988d5df24767851534cfe0b7a21d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCam: {fileID: 6098057781736376569}
+  equipCam: {fileID: 1443454453010741005}
+  deathCam: {fileID: 2270432799400361392}
 --- !u!114 &4575255673969955361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,6 +1321,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bda3d4a6-0622-464e-ba08-e97ced29c58b
     m_ActionName: Player/Sprint[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6236919215018472209}
+        m_TargetAssemblyTypeName: CraftMenu, Assembly-CSharp
+        m_MethodName: OnStructureButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 248dcc24-59d9-414f-975b-e97c2adf862c
+    m_ActionName: Player/Structure[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6236919215018472209}
+        m_TargetAssemblyTypeName: CraftMenu, Assembly-CSharp
+        m_MethodName: OnBuildInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4bd4c560-0a9b-4cfe-a8c8-8c916fdbd9de
+    m_ActionName: Player/Build[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1301,10 +1371,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  SprintSpeed: 7.5
+  curSpeed: 0
+  speedMultiflier: 1
   jumpForce: 80
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 3319
   cameraContainer: {fileID: 2226848932396265275}
   minXLook: -85
   maxXLook: 85
@@ -1380,11 +1453,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkRate: 0.05
-  maxCheckDistance: 3
+  maxCheckDistance: 5
   layerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   promptText: {fileID: 0}
+--- !u!114 &6236919215018472209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501690864755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8e05acd73cff544843e345ff628504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_BaseUI: {fileID: 0}
+  craft_build:
+  - craftName: Fire
+    go_Prefab: {fileID: 2565167163373689578, guid: 58b4e322c101d2f47a61a037aea73dc5, type: 3}
+    go_PreviewPrefab: {fileID: 2785031566421011502, guid: a479fd07d4133e74bb908fe05e4c90db, type: 3}
+  - craftName: Foundation
+    go_Prefab: {fileID: 3462425665076849981, guid: fc41b344c1190fb4495f7c8b4cfbca15, type: 3}
+    go_PreviewPrefab: {fileID: 3897204274234680382, guid: 977047ca9abb87a4fa5044996f832709, type: 3}
+  - craftName: Wall
+    go_Prefab: {fileID: 8647590115371425228, guid: 37405d1b093288b47b6104b55c4b105a, type: 3}
+    go_PreviewPrefab: {fileID: 8647590115371425228, guid: d5c6c93c7dc7fd8418cbbc64579d0a05, type: 3}
+  - craftName: Roof
+    go_Prefab: {fileID: 1906454156493676023, guid: eca9a279e0502114d8ea2eb8337bcb1a, type: 3}
+    go_PreviewPrefab: {fileID: 1906454156493676023, guid: 78b34962b9d137d4ab1cfa118f9a2566, type: 3}
+  player: {fileID: 1679395663757494928}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3136
+  range: 10
 --- !u!54 &2744209642635489210
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1710,6 +1814,111 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.018460998, y: 0.115177, z: 0.000028602779}
     m_Extent: {x: 0.067562245, y: 0.06303062, z: 0.10223059}
   m_DirtyAABB: 0
+--- !u!1 &2270432799400361392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4031903348758621231}
+  - component: {fileID: 6444583695575707353}
+  - component: {fileID: 8856319914426742061}
+  m_Layer: 8
+  m_Name: DeathCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4031903348758621231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270432799400361392}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.706, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1438546959266459337}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &6444583695575707353
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270432799400361392}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!95 &8856319914426742061
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270432799400361392}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cbc420ea9119e404ca6b93ebec320f8f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2470364635768231273
 GameObject:
   m_ObjectHideFlags: 0
@@ -4081,10 +4290,10 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 3319
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
