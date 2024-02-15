@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MonsterDamageHit : MonoBehaviour
+public class MonsterDamageHit : MonoBehaviour, IDamagable
 {
     private SkinnedMeshRenderer _Renderer;
+    protected MonsterController _monsterController;
+    protected IDamagable damagable;
 
     private void Awake()
     {
         _Renderer = GetComponent<SkinnedMeshRenderer>();
+        _monsterController = GetComponentInParent<MonsterController>();
+        damagable = _monsterController.GetComponent<IDamagable>();
     }
     public void Hit()
     {
@@ -22,5 +26,9 @@ public class MonsterDamageHit : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         _Renderer.material.color = Color.white;
         yield break;
+    }
+    public void TakePhysicalDamage(int damageAmount)
+    {
+        damagable.TakePhysicalDamage(damageAmount);
     }
 }

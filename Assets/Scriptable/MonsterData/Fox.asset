@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8808cb2c6f4fc4cb10a6c1ccfea0f4, type: 3}
+  m_Name: Fox
+  m_EditorClassIdentifier: 
+  UnitName: Fox
+  type: 1
+  hp: 100
+  stamina: 10
+  offensePower: 10
+  defensePower: 5
+  moveSpeed: 4
+  attackSpeed: 2
+  detectionRange: 10
+  attackRange: 1
+  ExtentRange: 0.4
