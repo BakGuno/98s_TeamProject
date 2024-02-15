@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class Craft
@@ -17,7 +18,7 @@ public class Craft
 public class CraftMenu : MonoBehaviour
 {
     private bool isActivated = false;
-    private bool isPreviewActivated = false;
+    public bool isPreviewActivated { get; set; }
 
     [SerializeField] private GameObject go_BaseUI;
 
@@ -34,7 +35,13 @@ public class CraftMenu : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float range;
 
+    private PlayerMovements _movements;
 
+    private void Start()
+    {
+        _movements = GetComponent<PlayerMovements>();
+        isPreviewActivated = false;
+    }
 
     public void SlotClick(int slotNum)
     {
@@ -42,6 +49,7 @@ public class CraftMenu : MonoBehaviour
         go_Prefab = craft_build[slotNum].go_Prefab;
         isPreviewActivated = true;
         go_BaseUI.SetActive(false);
+        _movements.ToggleCursor(false);
     }
 
     void Update()
@@ -49,19 +57,38 @@ public class CraftMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Cancel();
 
-        if (Input.GetKeyDown(KeyCode.T)) //TODO : new input system으로 바꾸기
-            Window();
+        /*if (Input.GetKeyDown(KeyCode.T)) //TODO : new input system으로 바꾸기
+            Window();*/
 
         if (isPreviewActivated)
             PreviewPositionUpdate();
     }
 
+    public void OnStructureButton(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            Window();
+        }
+    }
+
     private void Window()
     {
         if (!isActivated)
+        {
+            if (isPreviewActivated)
+            {
+                Destroy(go_Preview);
+                isPreviewActivated = false;
+            }
             OpenWindow();
+            _movements.ToggleCursor(true);
+        }
         else
+        {
             CloseWindow();
+            _movements.ToggleCursor(false);
+        }
     }
 
     private void OpenWindow()
@@ -98,6 +125,12 @@ public class CraftMenu : MonoBehaviour
         { go_Preview.SetActive(false); }
     }
 
+    public void OnBuildInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            Build();
+    }
+
     public void Build()
     {
         if(isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
@@ -125,5 +158,7 @@ public class CraftMenu : MonoBehaviour
         go_Prefab = null;
 
         go_BaseUI.SetActive(false);
+
+        _movements.ToggleCursor(false);
     }
 }

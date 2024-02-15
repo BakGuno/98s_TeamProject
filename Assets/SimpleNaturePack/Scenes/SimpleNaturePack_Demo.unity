@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.77161425, g: 0.9105345, b: 0.9955074, a: 1}
+  m_IndirectSpecularColor: {r: 0.7720149, g: 0.91068065, b: 0.99550074, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5113,7 +5113,7 @@ GameObject:
   - component: {fileID: 560171431}
   - component: {fileID: 560171430}
   m_Layer: 0
-  m_Name: Slot_0 (2)
+  m_Name: Slot_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5184,7 +5184,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 560171431}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1354663295}
+        m_TargetAssemblyTypeName: CraftMenu, Assembly-CSharp
+        m_MethodName: SlotClick
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &560171431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5775,6 +5787,46 @@ PrefabInstance:
       propertyPath: selectedItemDescription
       value: 
       objectReference: {fileID: 6873866783783241598}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 248dcc24-59d9-414f-975b-e97c2adf862c
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Player/Structure[/Keyboard/t]
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1354663295}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStructureButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CraftMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 571646308444885342, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: promptText
       value: 
@@ -5831,6 +5883,10 @@ PrefabInstance:
       propertyPath: m_Depth
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6098057781736376569, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 3319
+      objectReference: {fileID: 0}
     - target: {fileID: 7756282881668563433, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: health.uiBar
       value: 
@@ -5877,6 +5933,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       insertIndex: 3
       addedObject: {fileID: 1354663286}
+    - targetCorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      insertIndex: 10
+      addedObject: {fileID: 1354663295}
   m_SourcePrefab: {fileID: 100100000, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
 --- !u!1001 &643540076
 PrefabInstance:
@@ -6088,7 +6147,7 @@ GameObject:
   - component: {fileID: 664347158}
   - component: {fileID: 664347157}
   m_Layer: 0
-  m_Name: Slot_0 (3)
+  m_Name: Slot_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6159,7 +6218,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 664347158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1354663295}
+        m_TargetAssemblyTypeName: CraftMenu, Assembly-CSharp
+        m_MethodName: SlotClick
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &664347158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11417,7 +11488,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1347966160}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1354663295}
+        m_TargetAssemblyTypeName: CraftMenu, Assembly-CSharp
+        m_MethodName: SlotClick
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1354663276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -11443,6 +11526,37 @@ MonoBehaviour:
   mainCam: {fileID: 432856746}
   equipCam: {fileID: 767496957}
   deathCam: {fileID: 1754593831}
+--- !u!114 &1354663295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354663276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd8e05acd73cff544843e345ff628504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_BaseUI: {fileID: 1750238769}
+  craft_build:
+  - craftName: Fire
+    go_Prefab: {fileID: 0}
+    go_PreviewPrefab: {fileID: 2785031566421011502, guid: a479fd07d4133e74bb908fe05e4c90db, type: 3}
+  - craftName: Foundation
+    go_Prefab: {fileID: 3462425665076849981, guid: fc41b344c1190fb4495f7c8b4cfbca15, type: 3}
+    go_PreviewPrefab: {fileID: 3897204274234680382, guid: 977047ca9abb87a4fa5044996f832709, type: 3}
+  - craftName: Wall
+    go_Prefab: {fileID: 8647590115371425228, guid: 37405d1b093288b47b6104b55c4b105a, type: 3}
+    go_PreviewPrefab: {fileID: 8647590115371425228, guid: d5c6c93c7dc7fd8418cbbc64579d0a05, type: 3}
+  - craftName: Roof
+    go_Prefab: {fileID: 1906454156493676023, guid: eca9a279e0502114d8ea2eb8337bcb1a, type: 3}
+    go_PreviewPrefab: {fileID: 1906454156493676023, guid: 78b34962b9d137d4ab1cfa118f9a2566, type: 3}
+  player: {fileID: 1931203394}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3136
+  range: 10
 --- !u!1001 &1367280582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14617,7 +14731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1750238770
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15755,6 +15869,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f530af3eaf1f754c9884071ebca13ba, type: 3}
+--- !u!4 &1931203394 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1679395663757494928, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+  m_PrefabInstance: {fileID: 633599533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1933866072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16825,7 +16944,7 @@ GameObject:
   - component: {fileID: 2090468340}
   - component: {fileID: 2090468339}
   m_Layer: 0
-  m_Name: Slot_0 (1)
+  m_Name: Slot_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16896,7 +17015,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2090468340}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1354663295}
+        m_TargetAssemblyTypeName: CraftMenu, Assembly-CSharp
+        m_MethodName: SlotClick
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2090468340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16969,9 +17100,9 @@ RectTransform:
   m_Father: {fileID: 1846433385}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 650, y: -65}
   m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095223584
