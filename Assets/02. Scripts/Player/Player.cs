@@ -111,6 +111,7 @@ public class Player : MonoBehaviour,IDamagable
     public bool hasTorch = false;
     [HideInInspector]public bool isDead = false;
     private bool isCold;
+    public bool isrun;
     
 
     public float noHungerHealthDecay;
@@ -140,6 +141,7 @@ public class Player : MonoBehaviour,IDamagable
         mental.curValue = mental.startValue;
         iswarm = false;
         isCold = false;
+        isrun = false;
     }
 
     void Update()
@@ -195,7 +197,15 @@ public class Player : MonoBehaviour,IDamagable
         if (health.curValue == 0.0f)
             Die();
 
-        stamina.Add(stamina.regenRate * Time.deltaTime);
+        if (isrun)
+        {
+            stamina.Subtract(2f*Time.deltaTime);
+        }
+        else
+        {
+            stamina.Add(stamina.regenRate * Time.deltaTime);    
+        }
+        
         //TODO : 레이캐스트 발사(메인카메라 - 오브젝트 거리 측정)
         //ShoootRayToObj();
 
@@ -221,6 +231,11 @@ public class Player : MonoBehaviour,IDamagable
     public void Eat(float amount)
     {
         hunger.Add(amount);
+    }
+
+    public void Drink(float amount)
+    {
+        thirsty.Add(amount);
     }
 
     public bool UseStamina(float amount)

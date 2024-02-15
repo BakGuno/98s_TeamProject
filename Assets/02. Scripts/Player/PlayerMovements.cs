@@ -8,6 +8,9 @@ public class PlayerMovements : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
 
+    public float SprintSpeed;
+    public float curSpeed;
+
     private Vector2 curMovementInput;
     public float jumpForce;
     public LayerMask groundLayerMask;
@@ -37,6 +40,7 @@ public class PlayerMovements : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _player.OnDieEvnet += OnDie;
+        curSpeed = moveSpeed;
     }
 
 
@@ -48,10 +52,9 @@ public class PlayerMovements : MonoBehaviour
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= curSpeed;
         dir.y = _rigidbody.velocity.y;
         _rigidbody.velocity = dir;
-        
     }
 
     private void LateUpdate()
@@ -67,12 +70,12 @@ public class PlayerMovements : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
-            _player._animator.SetBool("Move",true);
+            _player._animator.SetBool("Move", true);
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
-            _player._animator.SetBool("Move",false);
+            _player._animator.SetBool("Move", false);
         }
     }
 
@@ -104,12 +107,22 @@ public class PlayerMovements : MonoBehaviour
 
     public void OnSprintInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (_player.stamina.curValue - 2 >= 0)
         {
-            _player._animator.SetBool("Sprint",true);
+            if (context.phase == InputActionPhase.Performed)
+            {
+                curSpeed = SprintSpeed;
+                _player.isrun = true;
+                _player._animator.SetBool("Sprint", true);
+            }
+            else if (context.phase == InputActionPhase.Canceled)
+            {
+                curSpeed = moveSpeed;
+                _player.isrun = false;
+                _player._animator.SetBool("Sprint", false);
+            }
         }
-        else if(context.phase == InputActionPhase.Canceled)
-            _player._animator.SetBool("Sprint",false);
+        else _player.isrun = false;
     }
 
     private bool IsGrounded()

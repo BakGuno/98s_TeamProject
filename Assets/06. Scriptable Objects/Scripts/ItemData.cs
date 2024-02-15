@@ -13,6 +13,7 @@ public enum ConsumableType
 {
     체력,
     배고픔,
+    목마름
 }
 
 [System.Serializable]

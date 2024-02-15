@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour,IInteractable
 {
    public ItemData item;
+   private float resetTime = 10f;
    
    public string GetInteractPrompt()
    {
@@ -14,6 +15,29 @@ public class ItemObject : MonoBehaviour,IInteractable
    public void OnInteract()
    {
       Inventory.instance.AddItem(item);
-      Destroy(gameObject);
+      if (item.type == ItemType.Equipable || item.type == ItemType.Resource)
+      {
+         Destroy(gameObject);
+      }
+      else
+      {
+         if (item.displayName != "물")
+         {
+            SetDisabled();
+            Invoke(nameof(Reset),resetTime); 
+         }
+      }
+   }
+   
+   void SetDisabled()
+   {
+      gameObject.GetComponent<MeshRenderer>().enabled = false;
+      gameObject.GetComponent<Collider>().enabled = false;
+   }
+
+   void Reset()
+   {
+      gameObject.GetComponent<MeshRenderer>().enabled = true;
+      gameObject.GetComponent<Collider>().enabled = true;
    }
 }

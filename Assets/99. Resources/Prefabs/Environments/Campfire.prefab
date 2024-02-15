@@ -4710,7 +4710,7 @@ Transform:
   m_Children:
   - {fileID: 5541005819576202536}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7245762860265136672
 SphereCollider:
@@ -4745,7 +4745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ede52f14b61b846885f71393e34526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heat: 1
+  heat: 0.3
 --- !u!1 &4288796565222098813
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,6 +42,13 @@ public class InteractionManager : MonoBehaviour
             
             if (Physics.Raycast(ray, out hit,maxCheckDistance, layerMask)) //ref는 채울수도 안채울수도, out은 무조건 채워서 돌려줌.
             {
+                Debug.Log(hit.collider.gameObject.layer);
+                if (hit.collider.gameObject.layer == 6) //Ground
+                {
+                    curInteractGameObject = null;
+                    curInteractable = null;
+                    promptText.gameObject.SetActive(false);
+                }
                 if (hit.collider.gameObject != curInteractGameObject)
                 {
                     curInteractGameObject = hit.collider.gameObject;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -120,7 +121,8 @@ public class Inventory : MonoBehaviour
 
     public void ThrowItem(ItemData item)
     {
-        Instantiate(item.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360f));
+        if(item.dropPrefab!=null)
+            Instantiate(item.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360f));
     }
 
     void UpdateUI()
@@ -210,6 +212,9 @@ public class Inventory : MonoBehaviour
                         break;
                     case ConsumableType.배고픔:
                         _player.Eat(selectedItem.item.consumables[i].value);
+                        break;
+                    case ConsumableType.목마름:
+                        _player.Drink(selectedItem.item.consumables[i].value);
                         break;
                 }
             }

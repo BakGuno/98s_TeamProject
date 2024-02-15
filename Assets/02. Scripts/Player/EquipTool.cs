@@ -22,9 +22,6 @@ public class EquipTool :  Equip
   
   [Header("Ray")]
   private Camera _camera;
-  private Ray _rayToHit;
-  private RaycastHit _hit;
-  Vector3 centerOfScreen = new Vector3(Screen.width / 2f, Screen.height / 2f,0);
   
   private void Awake()
   {
@@ -61,11 +58,14 @@ public class EquipTool :  Equip
 
       if (Physics.Raycast(ray, out hit, attackDistance))
       {
+          Debug.Log(Vector3.Distance(_camera.transform.position,hit.collider.transform.position));
+          Debug.Log(hit.collider.transform.name);
           if (doesGatherResources && hit.collider.TryGetComponent(out GatherResource resource)) //TODO : Resource = 자원용 스크립트 얘기함.
           {
               resource.Gather(hit.point,hit.normal);
               //hit.collider.gameobject.name으로 해서 이게 어떤 아이템인지 판별할 수 있고, 여기서 다 처리할 수 있음.
               //오브젝트가 많아지면 대응이 어렵기때문에 각각의 오브젝트에 스크립트를 넣는다던지, 배열로 다 받아온다던지 하면 확장성도 떨어진다.
+              //TODO : 여기서 프리팹 떨어지게는 할 수 있음. 근데 다 캐고나서 동작을 어떻게 해줘야될까. 용량이라던지 체크를해야되는데
           }
 
           if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damageable))
