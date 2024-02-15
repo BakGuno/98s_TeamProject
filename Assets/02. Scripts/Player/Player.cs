@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public interface IDamagable
 {
     void TakePhysicalDamage(int damageAmount);
+    void TakePhysicalBuff(int damageAmount);
 }
 
 [System.Serializable]
@@ -122,7 +123,9 @@ public class Player : MonoBehaviour,IDamagable
     public Coroutine _coroutine;
     public Animator _animator;
 
-    public UnityEvent onTakeDamage; //TODO : 데미지 인디케이터 UI 등록하기.
+    public UnityEvent onTakeDamage;
+    public UnityEvent onTakeButt;//TODO : 데미지 인디케이터 UI 등록하기.
+
     public event Action OnDieEvnet;
 
     private PlayerMovements _movements;
@@ -286,6 +289,11 @@ public class Player : MonoBehaviour,IDamagable
     {
         health.Subtract(damageAmount);
         _animator.SetTrigger("Hit");
-        onTakeDamage?.Invoke(); 
+        onTakeDamage?.Invoke();
+    }
+    public void TakePhysicalBuff(int damageAmount)
+    {
+        stamina.Subtract(damageAmount);
+        onTakeButt?.Invoke();
     }
 }

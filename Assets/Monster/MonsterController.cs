@@ -74,7 +74,7 @@ public class MonsterController : MonoBehaviour, IDamagable
         rayExtent = unitAbility.ExtentRange;
 
         nvAgent.speed = unitAbility.moveSpeed;
-        hp -= 1;
+
         StartCoroutine(StateMachine());
     }
     private IEnumerator StateMachine()
@@ -124,6 +124,10 @@ public class MonsterController : MonoBehaviour, IDamagable
                 Vector3 randomPosition = GetRandomPosition();
                 yield return new WaitForSeconds(updateInterval);
                 nvAgent.SetDestination(randomPosition);
+                if (hp < 0)
+                {
+                    friendlyMove = false;
+                }
             }
             if (nvAgent.remainingDistance < 2)
             {
@@ -139,12 +143,24 @@ public class MonsterController : MonoBehaviour, IDamagable
             nvAgent.isStopped = true;
         }
         AttackType attackType = _MonsterAnimator.AttackAnimation(monsterName);
-        yield return new WaitForSeconds(_MonsterAnimator.StateInfo());
-        if (_hit.collider != null && _hit.collider.name == "Player")
+
+        if (attackType == AttackType.ButtAttack)
+        {
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 15f);
+            for (int i = 0; i < hitColliders.Length; i++)
+            {
+                if (hitColliders[i].name == "Player")
+                {
+                    Attack(monsterName, attackType);
+                }
+            }
+        }
+        yield return new WaitForSeconds(0.5f);
+        if (_hit.collider != null && _hit.collider.name == "Player" && attackType != AttackType.ButtAttack)
         {
             Attack(monsterName, attackType);
         }
-        else if (_hit.collider == null || _hit.collider.name != "Player")
+        else if (_hit.collider == null || _hit.collider.name != "Player" && attackType != AttackType.ButtAttack)
         {
             ChangeState(State.RUN);
         }
@@ -286,6 +302,10 @@ public class MonsterController : MonoBehaviour, IDamagable
         {
             _rigidbody.velocity = Vector3.zero;
         }
+        if (state == State.DEATH)
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
         if (monsterType != MonsterType.friendly)
         {
             if (Physics.SphereCast(transform.position, transform.transform.lossyScale.x * rayExtent, transform.forward, out _hit, rayRange))
@@ -326,14 +346,7 @@ public class MonsterController : MonoBehaviour, IDamagable
                         damagable.TakePhysicalDamage(ad + 20);
                         break;
                     case AttackType.ButtAttack:
-                        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
-                        for (int i = 0; i < hitColliders.Length; i++)
-                        {
-                            if (hitColliders[i].name == "Player")
-                            {
-                                Debug.Log("ButtAttack");
-                            }
-                        }
+                        damagable.TakePhysicalBuff(50);
                         break;
                 }
                 break;
@@ -378,5 +391,9 @@ public class MonsterController : MonoBehaviour, IDamagable
     public void TakePhysicalDamage(int damageAmount)
     {
         DamageHit(damageAmount);
+    }
+    public void TakePhysicalBuff(int damageAmount)
+    {
+
     }
 }

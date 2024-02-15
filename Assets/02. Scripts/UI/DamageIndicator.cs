@@ -7,6 +7,7 @@ public class DamageIndicator : MonoBehaviour
 {
     public Image image;
     public float flashSpeed;
+    public float buffSpeed;
 
     private Coroutine _coroutine;
 
@@ -35,5 +36,24 @@ public class DamageIndicator : MonoBehaviour
         }
 
         image.GetComponent<Image>().enabled = false;
+    }
+    public void Buff()
+    {
+        image.GetComponent<Image>().enabled = true;
+        image.color = Color.white;
+        _coroutine = StartCoroutine(Debuff());
+    }
+    private IEnumerator Debuff()
+    {
+        float startAlpha = 0.3f;
+        float a = startAlpha;
+
+        while (a > 0.0f)
+        {
+            a -= (startAlpha / buffSpeed) * Time.deltaTime;
+            image.color = new Color(0.0f, 0.0f, 0.0f, a);
+            yield return null;
+        }
+
     }
 }

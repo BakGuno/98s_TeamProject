@@ -31,4 +31,8 @@ public class MonsterDamageHit : MonoBehaviour, IDamagable
     {
         damagable.TakePhysicalDamage(damageAmount);
     }
+    public void TakePhysicalBuff(int damageAmount)
+    {
+
+    }
 }

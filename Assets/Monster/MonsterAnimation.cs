@@ -6,6 +6,8 @@ public class MonsterAnimation : MonoBehaviour
 {
     Animator _animator;
     MonsterController _controller;
+
+    private bool isDeath = false;
     public enum AttackType
     {
         RightAttack,
@@ -83,7 +85,11 @@ public class MonsterAnimation : MonoBehaviour
     }
     public void DeathAnimation()
     {
-        _animator.SetTrigger("Death");
+        if (isDeath == false)
+        {
+            isDeath = true;
+            _animator.SetTrigger("Death");
+        }
     }
     public void HitAnimation()
     {

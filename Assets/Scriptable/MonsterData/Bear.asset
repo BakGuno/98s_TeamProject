@@ -15,11 +15,11 @@ MonoBehaviour:
   UnitName: Bear
   type: 2
   hp: 200
-  stamina: 20
+  stamina: 10
   offensePower: 20
   defensePower: 10
-  moveSpeed: 3
+  moveSpeed: 2
   attackSpeed: 2
   detectionRange: 10
   attackRange: 2
-  ExtentRange: 0.7
+  ExtentRange: 0.9
