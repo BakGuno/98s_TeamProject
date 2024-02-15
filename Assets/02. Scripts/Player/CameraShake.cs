@@ -46,6 +46,8 @@ public class CameraShake : MonoBehaviour
 
     public void StopShake()
     {
+        if (!isShake)
+            return;
         //StopCoroutine(nameof(Shake));
         Debug.Log("2");
         isShake = false;
