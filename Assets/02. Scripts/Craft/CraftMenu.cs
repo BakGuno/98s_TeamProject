@@ -49,7 +49,7 @@ public class CraftMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Cancel();
 
-        if (Input.GetKeyDown(KeyCode.Tab)) //TODO : new input system으로 바꾸기
+        if (Input.GetKeyDown(KeyCode.T)) //TODO : new input system으로 바꾸기
             Window();
 
         if (isPreviewActivated)
