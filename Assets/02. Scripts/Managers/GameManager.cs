@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Player player;
-    public Survive_UI SurviveUI;
     public _Time daytime;
 
     private void Awake()
@@ -19,15 +18,5 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
         else Destroy(gameObject);
-    }
-
-    void Start()
-    {
-        AudioManager.instance.BGMPlay(BGM.DAY);
-    }
-    
-    void Update()
-    {
-        
     }
 }
