@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public interface IDamagable
 [System.Serializable]
 public class Condition
 {
-    public float curValue;
+    [HideInInspector]public float curValue;
     public float maxValue;
     public float startValue;
     public float regenRate;
@@ -38,7 +39,7 @@ public class Condition
 [System.Serializable]
 public class Temperature
 {
-    [HideInInspector] public float starttemperature;
+    public float starttemperature;
     public float curtemperature;
     public float maxTemp;
     public float minTemp;
@@ -108,7 +109,7 @@ public class Player : MonoBehaviour,IDamagable
 
     public bool iswarm; //TODO : 낮 시간대는 따뜻하고 밤 시간대는 춥게
     public bool hasTorch = false;
-    private bool isDead = false;
+    [HideInInspector]public bool isDead = false;
     private bool isCold;
     
 
@@ -120,6 +121,8 @@ public class Player : MonoBehaviour,IDamagable
 
     public UnityEvent onTakeDamage; //TODO : 데미지 인디케이터 UI 등록하기.
     public event Action OnDieEvnet;
+    
+    
 
     private void Awake()
     {
@@ -193,10 +196,13 @@ public class Player : MonoBehaviour,IDamagable
             Die();
 
         stamina.Add(stamina.regenRate * Time.deltaTime);
+        //TODO : 레이캐스트 발사(메인카메라 - 오브젝트 거리 측정)
+        //ShoootRayToObj();
 
         UIUpdate();
     }
 
+   
     void UIUpdate()
     {
         health.uiBar.fillAmount = health.GetPercentage();
@@ -230,10 +236,8 @@ public class Player : MonoBehaviour,IDamagable
     {
         if (isDead)
         {
-            Debug.Log(isDead);
             return;
         }
-        Debug.Log(isDead);    
         isDead = true;
         _animator.SetTrigger("Dead");
         OnDieEvnet?.Invoke();

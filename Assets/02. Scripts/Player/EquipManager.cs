@@ -26,6 +26,7 @@ public class EquipManager : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed && curEquip != null&&_controller.canLook)
         {
+            //TODO : 화면 중심점으로 캐릭터와 오브젝트 사이의 거리를 재서 충돌에 관한 처리를.
             _player._animator.SetTrigger("Attack");
             curEquip.OnAttackInput(_player);
         }

@@ -19,8 +19,13 @@ public class EquipTool :  Equip
   public int damage;
 
   private Animator _animator;
+  
+  [Header("Ray")]
   private Camera _camera;
-
+  private Ray _rayToHit;
+  private RaycastHit _hit;
+  Vector3 centerOfScreen = new Vector3(Screen.width / 2f, Screen.height / 2f,0);
+  
   private void Awake()
   {
     _camera = Camera.main;
@@ -43,6 +48,7 @@ public class EquipTool :  Equip
       }
   }
 
+
   void OnCanAttack()
   {
       attacking = false;
@@ -55,9 +61,11 @@ public class EquipTool :  Equip
 
       if (Physics.Raycast(ray, out hit, attackDistance))
       {
-          if (doesGatherResources && hit.collider.TryGetComponent( out Resource resource)) //TODO : Resource = 자원용 스크립트 얘기함.
+          if (doesGatherResources && hit.collider.TryGetComponent(out GatherResource resource)) //TODO : Resource = 자원용 스크립트 얘기함.
           {
               resource.Gather(hit.point,hit.normal);
+              //hit.collider.gameobject.name으로 해서 이게 어떤 아이템인지 판별할 수 있고, 여기서 다 처리할 수 있음.
+              //오브젝트가 많아지면 대응이 어렵기때문에 각각의 오브젝트에 스크립트를 넣는다던지, 배열로 다 받아온다던지 하면 확장성도 떨어진다.
           }
 
           if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damageable))
