@@ -191,18 +191,12 @@ public class Player : MonoBehaviour,IDamagable
         if (temperature.temperGauge.transform.rotation.z >= 0.35)
         {
             _movements.speedMultiflier = 0.5f;
-            isCold = true;
             _cameraShake.StartShake();
         }
         else
         {
-            if (isCold)
-            {
-                Debug.Log("좆됨");
-                _movements.speedMultiflier = 1f;
-                _cameraShake.StopShake();
-                isCold = false;
-            }
+            _movements.speedMultiflier = 1f;
+            _cameraShake.StopShake();
         }
         //TODO : 카메라 떨림 수정해야됨. 밖으로 뺴니까 생각하던것처럼 동작하긴 하는데 코드는 이런게 아님.
 
@@ -304,17 +298,6 @@ public class Player : MonoBehaviour,IDamagable
     public void TakePhysicalBuff(int damageAmount)
     {
         stamina.Subtract(damageAmount);
-        StartBuffShake();
         onTakeButt?.Invoke();
-        Invoke(nameof(StopBuffShake),2f);
-    }
-    void StartBuffShake()
-    {
-        _cameraShake.StartShake();
-    }
-    
-    void StopBuffShake()
-    {
-        _cameraShake.StopShake();
     }
 }

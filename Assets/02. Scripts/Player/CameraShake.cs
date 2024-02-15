@@ -35,7 +35,6 @@ public class CameraShake : MonoBehaviour
 
     public void StartShake()
     {
-        Debug.Log("1");
         if (GameManager.instance.player._coroutine != null)
         {
             return;
@@ -46,10 +45,7 @@ public class CameraShake : MonoBehaviour
 
     public void StopShake()
     {
-        if (!isShake)
-            return;
         //StopCoroutine(nameof(Shake));
-        Debug.Log("2");
         isShake = false;
         GameManager.instance.player._coroutine = null;
     }
@@ -57,7 +53,6 @@ public class CameraShake : MonoBehaviour
     // 카메라 흔들기 함수
     public IEnumerator Shake() //TODO : 좋아보이진 않는다. 다시 검토할 필요가 있음
     {
-        Debug.Log("3");
         while (isShake) //요기 / 코루틴은 사용하면 항상 파괴점이 있어야하는데 여기는 없음.
         {
             
