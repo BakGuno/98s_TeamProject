@@ -190,13 +190,19 @@ public class Player : MonoBehaviour,IDamagable
 
         if (temperature.temperGauge.transform.rotation.z >= 0.35)
         {
+            isCold = true;
             _movements.speedMultiflier = 0.5f;
             _cameraShake.StartShake();
         }
         else
         {
-            _movements.speedMultiflier = 1f;
-            _cameraShake.StopShake();
+            if (isCold)
+            {
+                _movements.speedMultiflier = 1f;
+                _cameraShake.StopShake();
+                isCold = false;
+            }
+            
         }
         //TODO : 카메라 떨림 수정해야됨. 밖으로 뺴니까 생각하던것처럼 동작하긴 하는데 코드는 이런게 아님.
 
@@ -283,13 +289,10 @@ public class Player : MonoBehaviour,IDamagable
         _animator.SetTrigger("Dead");
         enabled = false;
         OnDieEvnet?.Invoke();
-        // foreach (Behaviour obj in transform.GetComponentsInChildren<Behaviour>())
-        // {
-        //     obj.enabled = false;
-        // }
+        
     }
 
-    public void TakePhysicalDamage(int damageAmount)//TODO : 가능하다면 시간으로 데미지캡 씌울 것.
+    public void TakePhysicalDamage(int damageAmount)
     {
         health.Subtract(damageAmount);
         _animator.SetTrigger("Hit");
@@ -298,6 +301,18 @@ public class Player : MonoBehaviour,IDamagable
     public void TakePhysicalBuff(int damageAmount)
     {
         stamina.Subtract(damageAmount);
+        StartBuffShake();
         onTakeButt?.Invoke();
+        Invoke(nameof(StopBuffShake),2f);
+    }
+
+    void StartBuffShake()
+    {
+        _cameraShake.StartShake();
+    }
+    
+    void StopBuffShake()
+    {
+        _cameraShake.StopShake();
     }
 }
