@@ -5,16 +5,14 @@ using UnityEngine.Audio;
 
 public enum BGM
 {
-    Day,
-    Sunset,
+    DAY,
+    SUNSET,
 }
 
 public enum SFX
 {
-    UI_SELECT,
-    ROUND_START,
-    ROUND_END,
-    DAMAGED,
+    STEP,
+
 }
 
 public class AudioManager : MonoBehaviour
@@ -48,7 +46,7 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         Init();
-        BGMPlay(BGM.Day);
+        BGMPlay(BGM.DAY);
     }
 
     private void Init()
@@ -83,6 +81,8 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    // 효과음을 틀고자 하는 부분에서 아래와 같이 호출
+    // AudioManager.instance.SFXPlay(SFX.STEP);
     public void SFXPlay(SFX sfx)
     {
         for (int i = 0; i < sfxPlayers.Length; ++i)
@@ -100,7 +100,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // 브금을 틀고자 하는 부분에서 아래와 같이 호출
-    // AudioManager.instance.BGMPlay(BGM.Day);
+    // AudioManager.instance.BGMPlay(BGM.DAY);
     public void BGMPlay(BGM bgm)
     {
         bgmPlayer.clip = _bgmClip[(int)bgm];

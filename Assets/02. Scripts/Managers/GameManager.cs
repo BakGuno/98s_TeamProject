@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        AudioManager.instance.BGMPlay(BGM.Day);
+        AudioManager.instance.BGMPlay(BGM.DAY);
     }
     
     void Update()
