@@ -103,31 +103,31 @@ public class MonsterAnimation : MonoBehaviour
         {
             case "Bear":
 
-                if (randomAttackType <= 30 && randomAttackType > 0)
+                if (randomAttackType == 0 && randomAttackType == 0)
                 {
                     _animator.SetBool("RunForward", false);
                     _animator.SetTrigger("Attack1");
                     attackType = AttackType.RightAttack;
                 }
-                else if (randomAttackType <= 60 && randomAttackType > 30)
+                else if (randomAttackType == 0 && randomAttackType == 0)
                 {
                     _animator.SetBool("RunForward", false);
                     _animator.SetTrigger("Attack2");
                     attackType = AttackType.LeftAttack;
                 }
-                else if (randomAttackType <= 80 && randomAttackType > 60)
+                else if (randomAttackType == 0 && randomAttackType == 0)
                 {
                     _animator.SetBool("RunForward", false);
                     _animator.SetTrigger("Attack3");
                     attackType = AttackType.BiteAttack;
                 }
-                else if (randomAttackType <= 90 && randomAttackType > 80)
+                else if (randomAttackType == 0 && randomAttackType == 0)
                 {
                     _animator.SetBool("RunForward", false);
                     _animator.SetTrigger("Attack5");
                     attackType = AttackType.StrongAttack;
                 }
-                else if (randomAttackType <= 100 && randomAttackType > 90)
+                else if (randomAttackType < 100 && randomAttackType > 0)
                 {
                     _animator.SetBool("RunForward", false);
                     _animator.SetTrigger("Buff");
