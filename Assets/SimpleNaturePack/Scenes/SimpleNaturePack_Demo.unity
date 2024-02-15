@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7714514, g: 0.91063726, b: 0.99550337, a: 1}
+  m_IndirectSpecularColor: {r: 0.7717508, g: 0.91070056, b: 0.9955141, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5789,18 +5789,30 @@ PrefabInstance:
       objectReference: {fileID: 6873866783783241598}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionId
       value: 248dcc24-59d9-414f-975b-e97c2adf862c
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 4bd4c560-0a9b-4cfe-a8c8-8c916fdbd9de
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionName
       value: Player/Structure[/Keyboard/t]
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: Player/Build[/Mouse/rightButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -5808,7 +5820,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1354663295}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1354663295}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -5816,15 +5836,31 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnStructureButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBuildInput
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CraftMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CraftMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 438552162805765884, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 571646308444885342, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -5891,6 +5927,10 @@ PrefabInstance:
       propertyPath: SprintSpeed
       value: 7.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2028728755242575730, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 3319
+      objectReference: {fileID: 0}
     - target: {fileID: 6098057781736376569, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_Depth
       value: 0
@@ -5919,6 +5959,10 @@ PrefabInstance:
       propertyPath: thirsty.uiBar
       value: 
       objectReference: {fileID: 1698590020}
+    - target: {fileID: 7756282881668563433, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: useSprintStamina
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7756282881668563433, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: temperature.hotUI
       value: 
@@ -11447,7 +11491,7 @@ MonoBehaviour:
   go_BaseUI: {fileID: 1750238769}
   craft_build:
   - craftName: Fire
-    go_Prefab: {fileID: 0}
+    go_Prefab: {fileID: 2565167163373689578, guid: 58b4e322c101d2f47a61a037aea73dc5, type: 3}
     go_PreviewPrefab: {fileID: 2785031566421011502, guid: a479fd07d4133e74bb908fe05e4c90db, type: 3}
   - craftName: Foundation
     go_Prefab: {fileID: 3462425665076849981, guid: fc41b344c1190fb4495f7c8b4cfbca15, type: 3}

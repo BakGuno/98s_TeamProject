@@ -116,6 +116,7 @@ public class Player : MonoBehaviour,IDamagable
 
     public float noHungerHealthDecay;
     public float useSprintStamina;
+    public float thirstyMultiplier=1f;
 
     public CameraShake _cameraShake;
     public Coroutine _coroutine;
@@ -174,7 +175,7 @@ public class Player : MonoBehaviour,IDamagable
         }
 
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
-        thirsty.Subtract(thirsty.decayRate * Time.deltaTime);
+        thirsty.Subtract(thirsty.decayRate*thirstyMultiplier * Time.deltaTime);
 
         if (!hasLight)
             mental.Subtract(mental.decayRate * Time.deltaTime);
@@ -186,13 +187,24 @@ public class Player : MonoBehaviour,IDamagable
 
         if (temperature.temperGauge.transform.rotation.z >= 0.35)
         {
+            _movements.speedMultiflier = 0.5f;
             _cameraShake.StartShake();
         }
         else
         {
+            _movements.speedMultiflier = 1f;
             _cameraShake.StopShake();
         }
         //TODO : 카메라 떨림 수정해야됨. 밖으로 뺴니까 생각하던것처럼 동작하긴 하는데 코드는 이런게 아님.
+
+        if (temperature.temperGauge.transform.rotation.z <= -0.35)
+        {
+            thirstyMultiplier = 1.5f;
+        }
+        else
+        {
+            thirstyMultiplier = 1f;
+        }
 
 
         if (hunger.curValue == 0.0f || thirsty.curValue == 0.0f)
@@ -262,6 +274,7 @@ public class Player : MonoBehaviour,IDamagable
         }
         isDead = true;
         _animator.SetTrigger("Dead");
+        enabled = false;
         OnDieEvnet?.Invoke();
         // foreach (Behaviour obj in transform.GetComponentsInChildren<Behaviour>())
         // {

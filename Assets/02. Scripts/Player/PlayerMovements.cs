@@ -10,6 +10,7 @@ public class PlayerMovements : MonoBehaviour
 
     public float SprintSpeed;
     public float curSpeed;
+    public float speedMultiflier = 1f;
 
     private Vector2 curMovementInput;
     public float jumpForce;
@@ -52,7 +53,7 @@ public class PlayerMovements : MonoBehaviour
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= curSpeed;
+        dir *= curSpeed*speedMultiflier;
         dir.y = _rigidbody.velocity.y;
         _rigidbody.velocity = dir;
     }
