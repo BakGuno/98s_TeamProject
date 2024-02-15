@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aba21057-87e5-4507-b4da-3d0f2f24d90b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/03. PlayerInputs/PlayerController.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/03. PlayerInputs/PlayerController.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.98s_TeamProject/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.98s_TeamProject/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02. Scripts/Environments/DayNight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02. Scripts/Environments/DayNight.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02. Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02. Scripts/Managers/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/02. Scripts/UI/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/02. Scripts/UI/Inventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/99. Resources/Prefabs/Environments/Campfire.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/99. Resources/Prefabs/Environments/Campfire.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Panoramics/FS003/FS003_Day.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Panoramics/FS003/FS003_Day.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Panoramics/FS003/FS003_Night.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fantasy Skybox FREE/Panoramics/FS003/FS003_Night.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LowPolyWater_Pack/Plane Meshes/Ocean50x50W750H750.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LowPolyWater_Pack/Plane Meshes/Ocean50x50W750H750.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Piloto Studio/Shaders/SimplyToon_Piloto/GradModels_Toony.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Piloto Studio/Shaders/SimplyToon_Piloto/GradModels_Toony.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Demo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SimpleNaturePack/Scenes/SimpleNaturePack_Demo.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,14 +31,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
