@@ -129,31 +129,28 @@ public class MonsterController : MonoBehaviour
     }
     private IEnumerator ATTACK()
     {
-        while (state == State.ATTACK)
+        if (!nvAgent.isStopped)
         {
-            if (!nvAgent.isStopped)
-            {
-                nvAgent.isStopped = true;
-            }
-            switch (monsterName)
-            {
-                case "Bear":
-                    AttackType attackType = _MonsterAnimator.AttackAnimation(monsterName);
-
-                    yield return new WaitForSeconds(_MonsterAnimator.StateInfo() - 1f);
-                    if (_hit.collider.name != null && attackType != AttackType.ButtAttack)
-                    {
-                        Attack(_hit.collider.name, monsterName, attackType);
-                    }
-                    else if (attackType == AttackType.ButtAttack)
-                    {
-                        Attack(_hit.collider.name, monsterName, attackType);
-                    }
-                    break;
-            }
-
-            yield return new WaitForSeconds(unitAbility.attackSpeed);
+            nvAgent.isStopped = true;
         }
+        switch (monsterName)
+        {
+            case "Bear":
+                AttackType attackType = _MonsterAnimator.AttackAnimation(monsterName);
+
+                yield return new WaitForSeconds(_MonsterAnimator.StateInfo() - 1f);
+                if (_hit.collider.name != null && attackType != AttackType.ButtAttack)
+                {
+                    Attack(_hit.collider.name, monsterName, attackType);
+                }
+                else if (attackType == AttackType.ButtAttack)
+                {
+                    Attack(_hit.collider.name, monsterName, attackType);
+                }
+                break;
+        }
+
+        yield return new WaitForSeconds(unitAbility.attackSpeed);
     }
     private IEnumerator DEATH()
     {
@@ -289,7 +286,6 @@ public class MonsterController : MonoBehaviour
                 {
                     case AttackType.RightAttack:
                         Debug.Log("RightAttack");
-                        DamageHit();
                         break;
                     case AttackType.LeftAttack:
                         Debug.Log("LeftAttack");
@@ -334,5 +330,6 @@ public class MonsterController : MonoBehaviour
     public void DamageHit()
     {
         _monsterDamageHit.Hit();
+        _MonsterAnimator.HitAnimation();
     }
 }

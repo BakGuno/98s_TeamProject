@@ -73,7 +73,11 @@ public class MonsterAnimation : MonoBehaviour
     }
     public void DeathAnimation()
     {
-        _animator.SetBool("Death",true);
+        _animator.SetTrigger("Death");
+    }
+    public void HitAnimation()
+    {
+        _animator.SetTrigger("Hit");
     }
     // Attck
     public AttackType AttackAnimation(string name)
