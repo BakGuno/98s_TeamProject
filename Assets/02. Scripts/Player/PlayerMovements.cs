@@ -107,7 +107,7 @@ public class PlayerMovements : MonoBehaviour
 
     public void OnSprintInput(InputAction.CallbackContext context)
     {
-        if (_player.stamina.curValue - 2 >= 0)
+        if (_player.stamina.curValue - _player.useSprintStamina >= 0)
         {
             if (context.phase == InputActionPhase.Performed)
             {
@@ -122,8 +122,8 @@ public class PlayerMovements : MonoBehaviour
                 _player._animator.SetBool("Sprint", false);
             }
         }
-        else _player.isrun = false;
     }
+    
 
     private bool IsGrounded()
     {

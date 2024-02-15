@@ -115,6 +115,7 @@ public class Player : MonoBehaviour,IDamagable
     
 
     public float noHungerHealthDecay;
+    public float useSprintStamina;
 
     public CameraShake _cameraShake;
     public Coroutine _coroutine;
@@ -122,6 +123,8 @@ public class Player : MonoBehaviour,IDamagable
 
     public UnityEvent onTakeDamage; //TODO : 데미지 인디케이터 UI 등록하기.
     public event Action OnDieEvnet;
+
+    private PlayerMovements _movements;
     
     
 
@@ -133,6 +136,7 @@ public class Player : MonoBehaviour,IDamagable
 
     void Start()
     {
+        _movements = GetComponent<PlayerMovements>();
         health.curValue = health.startValue;
         hunger.curValue = hunger.startValue;
         stamina.curValue = stamina.startValue;
@@ -199,15 +203,18 @@ public class Player : MonoBehaviour,IDamagable
 
         if (isrun)
         {
-            stamina.Subtract(2f*Time.deltaTime);
+            stamina.Subtract(useSprintStamina*Time.deltaTime);
+            if (stamina.curValue == 0)
+            {
+                isrun = false;
+                _movements.curSpeed = _movements.moveSpeed;
+                _animator.SetBool("Sprint",false);
+            }
         }
         else
         {
             stamina.Add(stamina.regenRate * Time.deltaTime);    
         }
-        
-        //TODO : 레이캐스트 발사(메인카메라 - 오브젝트 거리 측정)
-        //ShoootRayToObj();
 
         UIUpdate();
     }
