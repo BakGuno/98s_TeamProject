@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.7717508, g: 0.91070056, b: 0.9955141, a: 1}
+  m_IndirectSpecularColor: {r: 0.77162606, g: 0.9106046, b: 0.9955186, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1891,6 +1891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 133541121}
   flashSpeed: 0.5
+  buffSpeed: 0
 --- !u!114 &133541121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3667,7 +3668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1175554935}
-  SurviveUI: {fileID: 0}
   daytime: 0
 --- !u!1 &359538236
 GameObject:
@@ -15086,6 +15086,67 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &1760354771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.8384584
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -122.51609
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -318.22137
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472703132990424929, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989504125767308492, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 136092ee4ede11041bd68cdd1ea7580f, type: 3}
 --- !u!1001 &1763633187
 PrefabInstance:
   m_ObjectHideFlags: 0

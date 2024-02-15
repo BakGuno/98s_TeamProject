@@ -78,17 +78,20 @@ public class DayNight : MonoBehaviour
 
     private void SetTimeDay()
     {
-        // ReSharper disable once RedundantCheckBeforeAssignment
-        if(GameManager.instance.daytime != _Time.Day)
-            GameManager.instance.daytime = _Time.Day;
+        if (GameManager.instance.daytime == _Time.Day)
+            return;
+        GameManager.instance.daytime = _Time.Day;
+        AudioManager.instance.BGMPlay(BGM.DAY);
         RenderSettings.skybox = dayTimeSkybox;
     }
     
     private void SetTimeNight()
     {
-        // ReSharper disable once RedundantCheckBeforeAssignment
-        if(GameManager.instance.daytime != _Time.Night)
-            GameManager.instance.daytime = _Time.Night;
+
+        if (GameManager.instance.daytime == _Time.Night)
+            return;
+        GameManager.instance.daytime = _Time.Night;
+        AudioManager.instance.BGMPlay(BGM.SUNSET);
         RenderSettings.skybox = nightTimeSkybox;
     }
 }
