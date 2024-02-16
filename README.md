@@ -63,3 +63,6 @@
 - [Campfires & Torches Models and FX!](https://assetstore.unity.com/packages/3d/environments/campfires-torches-models-and-fx-242552)
 ### 캐릭터
 - [FREE Low Poly Human - RPG Character](https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/free-low-poly-human-rpg-character-219979)
+- [Toon Fox](https://assetstore.unity.com/packages/3d/characters/animals/toon-fox-183005)
+- [White Rabbit](https://assetstore.unity.com/packages/3d/characters/animals/white-rabbit-138709)
+- [FREE Stylized Bear - RPG Forest Animal](https://assetstore.unity.com/packages/3d/characters/animals/free-stylized-bear-rpg-forest-animal-228910)
